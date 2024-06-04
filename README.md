@@ -1,2 +1,2 @@
 # HomeStay_Management_SDN_Group3
-Manager HomeStay, Booking web
+Manager HomeStay System, Booking web
