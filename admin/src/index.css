@@ -11,3 +11,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.bg-auth {
+  text-align: center;
+  height: 100vh;
+  background-image: url('./assets/images/bg_2.jpg');
+  background-repeat: round;
+}
+.auth-box {
+  border: none;
+  border-radius: 10px;
+  background-color: rgba(118, 109, 244, 0.2);
+  box-shadow: 0 3px 10px 0 rgba(40, 48, 57, 0.8);
+  backdrop-filter: blur(5px);
+}
