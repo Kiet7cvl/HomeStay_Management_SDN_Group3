@@ -6,6 +6,6 @@ const db = {};
 db.user = require("./User.model");
 db.role = require("./Role.model");
 
-db.ROLES = ["ADMIN", "USER"];
+db.ROLES = ["ADMIN", "OWNER", "USER"];
 
 module.exports = db;
