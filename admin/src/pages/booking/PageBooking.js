@@ -18,6 +18,22 @@ export default function PageBooking() {
   });
 
   const bookings = [{
+    _id: "1",
+    status: "PENDING",
+    status_payment: "UNPAID",
+    price: "200000",
+    total_money: 400000,
+    amount_of_people: "2",
+    payment_type: "2",
+    check_in: "2024-03-16T00:00:00.000+00:00",
+    check_out: "2024-03-18T00:00:00.000+00:00",
+    customer_name: "Lê Quý Trường",
+    customer_email: "lqt@fpt.edu.vn",
+    customer_phone: "0886031112",
+    room: { name: "VIP" },
+    created_at: "2024-03-16T10:29:02.572+00:00"
+  }, {
+    _id: "2",
     status: "PENDING",
     status_payment: "UNPAID",
     price: "200000",
@@ -87,133 +103,7 @@ export default function PageBooking() {
     customer_phone: "0886031112",
     room: { name: "VIP" },
     created_at: "2024-03-16T10:29:02.572+00:00"
-  }, {
-    status: "PENDING",
-    status_payment: "UNPAID",
-    price: "200000",
-    total_money: 400000,
-    amount_of_people: "2",
-    payment_type: "2",
-    check_in: "2024-03-16T00:00:00.000+00:00",
-    check_out: "2024-03-18T00:00:00.000+00:00",
-    customer_name: "Lê Quý Trường",
-    customer_email: "lqt@fpt.edu.vn",
-    customer_phone: "0886031112",
-    room: { name: "VIP" },
-    created_at: "2024-03-16T10:29:02.572+00:00"
-  }, {
-    status: "PENDING",
-    status_payment: "UNPAID",
-    price: "200000",
-    total_money: 400000,
-    amount_of_people: "2",
-    payment_type: "2",
-    check_in: "2024-03-16T00:00:00.000+00:00",
-    check_out: "2024-03-18T00:00:00.000+00:00",
-    customer_name: "Lê Quý Trường",
-    customer_email: "lqt@fpt.edu.vn",
-    customer_phone: "0886031112",
-    room: { name: "VIP" },
-    created_at: "2024-03-16T10:29:02.572+00:00"
-  }, {
-    status: "PENDING",
-    status_payment: "UNPAID",
-    price: "200000",
-    total_money: 400000,
-    amount_of_people: "2",
-    payment_type: "2",
-    check_in: "2024-03-16T00:00:00.000+00:00",
-    check_out: "2024-03-18T00:00:00.000+00:00",
-    customer_name: "Lê Quý Trường",
-    customer_email: "lqt@fpt.edu.vn",
-    customer_phone: "0886031112",
-    room: { name: "VIP" },
-    created_at: "2024-03-16T10:29:02.572+00:00"
-  }, {
-    status: "PENDING",
-    status_payment: "UNPAID",
-    price: "200000",
-    total_money: 400000,
-    amount_of_people: "2",
-    payment_type: "2",
-    check_in: "2024-03-16T00:00:00.000+00:00",
-    check_out: "2024-03-18T00:00:00.000+00:00",
-    customer_name: "Lê Quý Trường",
-    customer_email: "lqt@fpt.edu.vn",
-    customer_phone: "0886031112",
-    room: { name: "VIP" },
-    created_at: "2024-03-16T10:29:02.572+00:00"
-  }, {
-    status: "PENDING",
-    status_payment: "UNPAID",
-    price: "200000",
-    total_money: 400000,
-    amount_of_people: "2",
-    payment_type: "2",
-    check_in: "2024-03-16T00:00:00.000+00:00",
-    check_out: "2024-03-18T00:00:00.000+00:00",
-    customer_name: "Lê Quý Trường",
-    customer_email: "lqt@fpt.edu.vn",
-    customer_phone: "0886031112",
-    room: { name: "VIP" },
-    created_at: "2024-03-16T10:29:02.572+00:00"
-  }, {
-    status: "PENDING",
-    status_payment: "UNPAID",
-    price: "200000",
-    total_money: 400000,
-    amount_of_people: "2",
-    payment_type: "2",
-    check_in: "2024-03-16T00:00:00.000+00:00",
-    check_out: "2024-03-18T00:00:00.000+00:00",
-    customer_name: "Lê Quý Trường",
-    customer_email: "lqt@fpt.edu.vn",
-    customer_phone: "0886031112",
-    room: { name: "VIP" },
-    created_at: "2024-03-16T10:29:02.572+00:00"
-  }, {
-    status: "PENDING",
-    status_payment: "UNPAID",
-    price: "200000",
-    total_money: 400000,
-    amount_of_people: "2",
-    payment_type: "2",
-    check_in: "2024-03-16T00:00:00.000+00:00",
-    check_out: "2024-03-18T00:00:00.000+00:00",
-    customer_name: "Lê Quý Trường",
-    customer_email: "lqt@fpt.edu.vn",
-    customer_phone: "0886031112",
-    room: { name: "VIP" },
-    created_at: "2024-03-16T10:29:02.572+00:00"
-  }, {
-    status: "PENDING",
-    status_payment: "UNPAID",
-    price: "200000",
-    total_money: 400000,
-    amount_of_people: "2",
-    payment_type: "2",
-    check_in: "2024-03-16T00:00:00.000+00:00",
-    check_out: "2024-03-18T00:00:00.000+00:00",
-    customer_name: "Lê Quý Trường",
-    customer_email: "lqt@fpt.edu.vn",
-    customer_phone: "0886031112",
-    room: { name: "VIP" },
-    created_at: "2024-03-16T10:29:02.572+00:00"
-  }, {
-    status: "PENDING",
-    status_payment: "UNPAID",
-    price: "200000",
-    total_money: 400000,
-    amount_of_people: "2",
-    payment_type: "2",
-    check_in: "2024-03-16T00:00:00.000+00:00",
-    check_out: "2024-03-18T00:00:00.000+00:00",
-    customer_name: "Lê Quý Trường",
-    customer_email: "lqt@fpt.edu.vn",
-    customer_phone: "0886031112",
-    room: { name: "VIP" },
-    created_at: "2024-03-16T10:29:02.572+00:00"
-  },]
+  }]
   const [params, setParams] = useState({});
 
   // const [bookings, setBookings] = useState();
@@ -235,15 +125,16 @@ export default function PageBooking() {
 
   };
 
-  // const handleDelete = async (id) => {
-  //   const response = await bookingApi.delete(id);
-  //   if (response?.status === "success" || response?.status === 200) {
-  //     toast("Xóa thành công!");
-  //     getBookings({ ...params }).then((r) => {});
-  //   } else {
-  //     toast(response?.error || "error");
-  //   }
-  // };
+  const handleDelete = async (id) => {
+    window.confirm("Bạn có chắc chắn muốn xóa");
+    // const response = await bookingApi.delete(id);
+    // if (response?.status === "success" || response?.status === 200) {
+    //   toast("Xóa thành công!");
+    //   getBookings({ ...params }).then((r) => {});
+    // } else {
+    //   toast(response?.error || "error");
+    // }
+  };
 
 
   return (
@@ -259,7 +150,7 @@ export default function PageBooking() {
             </Breadcrumb>
             <Table responsive striped bordered hover>
               <thead>
-                <tr> 
+                <tr>
                   <th>#</th>
                   <th>Customer</th>
                   <th>Room</th>
@@ -316,10 +207,7 @@ export default function PageBooking() {
                           </Link>
                         </td>
                         <td>
-
                           <Badge bg="primary">TT Online</Badge>
-
-
                         </td>
                         <td>
                           <Link
@@ -339,7 +227,7 @@ export default function PageBooking() {
                           <Button
                             variant="danger"
                             size="sm"
-                          // onClick={() => handleDelete(item._id)}
+                            onClick={() => handleDelete(item._id)}
                           >
                             Delete
                           </Button>{" "}
