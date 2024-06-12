@@ -6,7 +6,7 @@ import React from "react";
 // import ContactPage from "../page/others/contactPage";
 // import Home from "../page/home/home";
 // import ErrorPage from "../page/auth/error";
-// import SignUpPage from "../page/auth/registerPage";
+import SignUpPage from "../page/auth/registerPage";
 import { SignInPage } from "../page/auth/loginPage";
 // import RoomDetailPage from "../page/room/roomDetailPage";
 // import { BlogDetail } from "../components/blog/blogDetail";
@@ -109,11 +109,11 @@ export const Routers = [
 	// 		path: "/home",
 	// 		component: <Home />
 	// 	},
-	// 	{
-	// 		path: "/account",
-	// 		title: 'Thông tin tài khoản',
-	// 		component: <ProfilePage />
-	// 	},
+		// {
+		// 	path: "/account",
+		// 	title: 'Thông tin tài khoản',
+		// 	component: <ProfilePage />
+		// },
 	// 	{
 	// 		path: "/contact",
 	// 		title: 'Liên hệ',
@@ -126,6 +126,6 @@ export const Routers = [
 
 
 export const AuthRoutes = [
-	// { path: "/sign-up", component: <SignUpPage /> },
+	{ path: "/sign-up", component: <SignUpPage /> },
 	{ path: "/sign-in", component: <SignInPage /> }
 ]
