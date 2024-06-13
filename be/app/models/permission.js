@@ -13,7 +13,7 @@ async function checkPermission(userId, requiredPermission) {
       .populate("premission");
 
     for (const role of roles) {
-      // ADMIN và OWNER có tất cả các quyền
+      // ADMIN va OWNER co tat ca cac quyen
       if (role.name === "ADMIN" || role.name === "OWNER") {
         return true;
       }
@@ -40,7 +40,7 @@ async function createUser(data) {
   } catch (error) {
     if (error.name === "ValidationError") {
       for (field in error.errors) {
-        console.error(error.errors[field].message); // In ra thông báo lỗi xác thực
+        console.error(error.errors[field].message); // In ra thông bao loi xac thuc
       }
     } else {
       console.error("Error creating user:", error);

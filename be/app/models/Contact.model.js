@@ -6,17 +6,17 @@ const contactSchema = new Schema(
   {
     name: {
       type: String,
-      required: "name cannot be blank",
+      required: "Name cannot be blank",
     },
     email: {
       type: String,
-      required: "email cannot be blank",
-      match: [/.+\@.+\..+/, "email is not in the correct format"], // Kiểm tra định dạng email
+      required: "Email cannot be blank",
+      match: [/.+\@.+\..+/, "Email is not in the correct format"],
       validate: {
         validator: function (checkEmail) {
           return /.+\@.+\..+/.test(checkEmail);
         },
-        message: (props) => `${props.value} is not a valid email`, // Thông báo lỗi khi định dạng email không hợp lệ
+        message: (props) => `${props.value} is not a valid email`,
       },
     },
     subject: {

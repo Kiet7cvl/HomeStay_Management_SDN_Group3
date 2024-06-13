@@ -10,6 +10,7 @@ async function someProtectedAction(userId) {
     throw new Error("Access denied");
   }
 
-  // Thực hiện hành động bảo vệ
   console.log("Action performed successfully");
 }
+
+module.exports = { someProtectedAction };
