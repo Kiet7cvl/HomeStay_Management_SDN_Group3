@@ -1,33 +1,39 @@
-import React, { useState } from 'react';
-import { Breadcrumb, Button, Col, Container, Form, Row } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-// import userApi from "../../services/userService";
-// import ImageForm from '../../common/form/imageForm';
+import React, {useEffect, useState} from 'react';
+import {Breadcrumb, Button, Col, Container, Form, Row} from "react-bootstrap";
+import {Link, useNavigate, useParams} from "react-router-dom";
+import {toast} from "react-toastify";
+import moment from 'moment';
+// import roleApi from "../../services/roleService";
+// import adminApi from "../../services/adminService";
 // import uploadApi from '../../services/uploadService';
+// import ImageForm from '../../common/form/imageForm';
 
-export default function CreateUser() {
+export default function UpdateAdmin() {
 
     const [validated, setValidated] = useState(false);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [phone, setPhone] = useState('');
     const [sex, setSex] = useState('Nam');
+    const [phone, setPhone] = useState('');
     const [birthday, setBirthday] = useState('');
     const [avatar, setAvatar] = useState(null);
-    const [change, setChange] = useState(false);
-    const [type, setType] = useState('USER');
-
-    const [fileAlbums, setFileAlbums] = useState([
-        {
-            imgBase64: null,
-            file: null
-        }
-    ]);
+    const [type, setType] = useState('ADMIN');
 
 
+    const [roles, setRoles] = useState([]);
+    const [checked, setChecked] = useState([]);
 
+	const [change, setChange] = useState(false);
+
+	const [ fileAlbums, setFileAlbums ] = useState( [
+		{
+			imgBase64: null,
+			file: null
+		}
+	] );
+
+
+    const params = useParams();
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
@@ -39,21 +45,21 @@ export default function CreateUser() {
         //     let data = {
         //         name: name,
         //         avatar: avatar,
-        //         type: type,
         //         email: email,
         //         birthday: birthday,
         //         sex: sex,
-        //     };
+        //         roles: checked
+        //     }
 
-        // 	const albums = await uploadApi.uploadMultiImg( fileAlbums );
-        // 	if(albums?.length > 0) {
-        // 		data.avatar = albums[0]
-        // 	}
+		// 	const albums = await uploadApi.uploadMultiImg( fileAlbums );
+		// 	if(albums?.length > 0) {
+		// 		data.avatar = albums[0]
+		// 	}
 
-        //     const response = await userApi.create(data);
+        //     const response = await adminApi.update(params.id, data);
         //     if (response.status === 'success' || response.status === 200) {
-        //         toast("Thêm mới thành công");
-        //         navigate('/user')
+        //         toast("Cập nhật thành công");
+        //         navigate('/admin')
         //     } else {
         //         toast(response?.message || response?.error || 'error');
         //     }
@@ -62,24 +68,76 @@ export default function CreateUser() {
         // setValidated(true);
     };
 
+    // const findByUser = async (id) => {
+    //     const response = await adminApi.findById(id);
+    //     if (response.status === 'success' || response.status === 200) {
+    //         setName(response.data.name);
+    //         setEmail(response.data.email);
+    //         setSex(response.data.sex);
+    //         setAvatar(response.data.avatar);
+    //         setBirthday(moment(response.data.birthday).format("yyyy-MM-DD"));
+    //         setChecked(response.data.roles);
+	// 		if(response.data.avatar) {
+	// 			setFileAlbums( [{
+	// 				imgBase64: response.data.avatar,
+	// 				file: null
+	// 			}] );
+	// 			setChange( true )
+	// 		}
+    //     } else {
+    //         toast(response?.message || response?.error || 'error');
+    //     }
+    // }
+
+    // const getListsRoles = async () => {
+    //     const response = await roleApi.index({
+    //         page_size: 1000
+    //     })
+    //     if (response?.status === 'success' || response?.status === 200) {
+    //         setRoles(response.data.roles);
+    //     }
+    // }
+
+    // const handleCheck = (event) => {
+    //     var updatedList = [...checked];
+    //     if (event.target.checked) {
+    //         updatedList = [...checked, event.target.value];
+    //     } else {
+    //         updatedList.splice(checked.indexOf(event.target.value), 1);
+    //     }
+    //     setChecked(updatedList);
+    // };
+
+    // const isChecked = (item) =>
+    //     checked.includes(item) ? true : false;
+
+    useEffect( () =>
+    {
+        // // getDetailData();
+        // if ( params.id )
+        // {
+        //     console.log('--------- params.id: ', params.id);
+        //     findByUser(params.id);
+        // }
+        // getListsRoles({...{}}).then(r => {});
+    }, [ params.id ] );
+
     return (
         <div>
             <Container>
                 <Row>
                     <Col>
                         <Breadcrumb>
-                            <Breadcrumb.Item href="/article" >
-                                Thành viên
+                            <Breadcrumb.Item  href="/admin" >
+                                Admin
                             </Breadcrumb.Item>
                             <Breadcrumb.Item active>Thêm mới</Breadcrumb.Item>
                         </Breadcrumb>
                         <div className={'d-flex justify-content-end'}>
-                            <Link className={'btn btn-sm btn-primary'} to={'/user'} >Trở về</Link>
+                            <Link className={'btn btn-sm btn-primary'} to={'/admin'} >Trở về</Link>
                         </div>
-                        <Form noValidate validated={validated}
-                        // onSubmit={handleSubmit}
-                        >
-                            <Row>
+                        <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                        <Row>
                                 <Form.Group as={Col} className="mb-3" controlId="exampleForm.ControlInput1">
                                     <Form.Label>Họ tên</Form.Label>
                                     <Form.Control required type="text" name={'name'} placeholder="Nguyễn Văn A"
@@ -98,24 +156,13 @@ export default function CreateUser() {
                                         Email không được để trống
                                     </Form.Control.Feedback>
                                 </Form.Group>
-                            </Row>
-                            <Row>
                                 <Form.Group as={Col} className="mb-3" controlId="exampleForm.ControlInput1">
-                                    <Form.Label>Số điện thoại</Form.Label>
-                                    <Form.Control required type="number" name={'phone'} placeholder="xxx-xxx-xxx"
+                                    <Form.Label>Phone</Form.Label>
+                                    <Form.Control required type="text" name={'email'} placeholder="xxx-xxx-xxx"
                                         onChange={event => setPhone(event.target.value)}
                                         value={phone} />
                                     <Form.Control.Feedback type="invalid">
                                         Phone không được để trống
-                                    </Form.Control.Feedback>
-                                </Form.Group>
-                                <Form.Group as={Col} className="mb-3" controlId="exampleForm.ControlInput1">
-                                    <Form.Label>Mật khẩu</Form.Label>
-                                    <Form.Control required type="text" name={'pass'} placeholder="********"
-                                        onChange={event => setPassword(event.target.value)}
-                                        value={password} />
-                                    <Form.Control.Feedback type="invalid">
-                                        Mật khẩu không được để trống
                                     </Form.Control.Feedback>
                                 </Form.Group>
                             </Row>
@@ -123,21 +170,17 @@ export default function CreateUser() {
                                 <Col className={'col-3'}>
                                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                         <Form.Label>Giới tính</Form.Label>
-                                        <Form.Select required className="mb-3" aria-label="Default select example"
-                                            onChange={event => setSex(event.target.value)}
-                                            value={sex} >
-                                            <option>Select menu</option>
-                                            <option value="Male">Male</option>
-                                            <option value="Female">Female</option>
-                                        </Form.Select>
+                                        <Form.Control  required type="text" name={'sex'} placeholder="Nam"
+                                                       onChange={event => setSex(event.target.value)}
+                                                       value={sex}/>
                                     </Form.Group>
                                 </Col>
                                 <Col className={'col-3'}>
                                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                         <Form.Label>Ngày sinh</Form.Label>
-                                        <Form.Control required type="date" name={'birthday'} placeholder=""
-                                            //    onChange={event => setBirthday(event.target.value)}
-                                            value={birthday} />
+                                        <Form.Control  required type="date" name={'birthday'} placeholder=""
+                                                       onChange={event => setBirthday(event.target.value)}
+                                                       value={birthday}/>
                                         <Form.Control.Feedback type="invalid">
                                             Ngày sinh không được để trống
                                         </Form.Control.Feedback>
@@ -146,7 +189,9 @@ export default function CreateUser() {
                                 <Col className={'col-3'}>
                                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                         <Form.Label>Loại tài khoản</Form.Label>
-                                        <Form.Control required type="text" name={'type'} placeholder="USER" readOnly value={type} />
+                                        <Form.Control  required type="text" name={'type'} placeholder="USER"
+                                                       onChange={event => setType(event.target.value)}
+                                                       value={type} readOnly/>
                                         <Form.Control.Feedback type="invalid">
                                             Loại tài khoản không được để trống
                                         </Form.Control.Feedback>
@@ -156,10 +201,28 @@ export default function CreateUser() {
                             <Form.Group controlId="formFile" className="mb-3">
                                 <Form.Label>Avatar</Form.Label>
                                 <Form.Control type="file" accept="image/*" />
+
                                 {/* <ImageForm files={ fileAlbums } changes={ change } setChanges={ setChange } setFiles={ setFileAlbums } max={ 1 } /> */}
                             </Form.Group>
-                            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                                <Button type="submit">Lưu dữ liệu</Button>
+                            <Row>
+                                { roles.map((item, index) => {
+                                    return (
+                                        <Col key={index} className={'col-3'}>
+                                            <Form.Check
+                                                // checked={isChecked(item._id)}
+                                                inline
+                                                label={item.name}
+                                                value={item._id}
+                                                // onChange={handleCheck}
+                                                type='checkbox'
+                                                id={`inline-checkbox-${item._id}`}
+                                            />
+                                        </Col>
+                                    )
+                                })}
+                            </Row>
+                            <Form.Group className="mb-3 mt-3" controlId="exampleForm.ControlTextarea1">
+                                <Button  type="submit">Lưu dữ liệu</Button>
                             </Form.Group>
                         </Form>
                     </Col>

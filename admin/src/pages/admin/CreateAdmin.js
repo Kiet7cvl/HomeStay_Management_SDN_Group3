@@ -1,23 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Breadcrumb, Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-// import userApi from "../../services/userService";
-// import ImageForm from '../../common/form/imageForm';
+// import adminApi from "../../services/adminService";
+// import roleApi from "../../services/roleService";
 // import uploadApi from '../../services/uploadService';
+// import ImageForm from '../../common/form/imageForm';
 
-export default function CreateUser() {
+export default function CreateAdmin() {
 
     const [validated, setValidated] = useState(false);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     const [phone, setPhone] = useState('');
     const [sex, setSex] = useState('Nam');
     const [birthday, setBirthday] = useState('');
     const [avatar, setAvatar] = useState(null);
+    const [password, setPassword] = useState(null);
+    const [roles, setRoles] = useState([]);
+    const [type, setType] = useState('ADMIN');
+
+    const [checked, setChecked] = useState([]);
+    const navigate = useNavigate();
+
     const [change, setChange] = useState(false);
-    const [type, setType] = useState('USER');
 
     const [fileAlbums, setFileAlbums] = useState([
         {
@@ -27,8 +33,28 @@ export default function CreateUser() {
     ]);
 
 
+    // const getListsRoles = async () => {
+    //     const response = await roleApi.index({
+    //         page_size: 1000
+    //     })
+    //     if (response?.status === 'success' || response?.status === 200) {
+    //         setRoles(response.data.roles);
+    //     }
+    // }
 
-    const navigate = useNavigate();
+    // const handleCheck = (event) => {
+    //     var updatedList = [...checked];
+    //     if (event.target.checked) {
+    //         updatedList = [...checked, event.target.value];
+    //     } else {
+    //         updatedList.splice(checked.indexOf(event.target.value), 1);
+    //     }
+    //     setChecked(updatedList);
+    // };
+
+    useEffect(() => {
+        // getListsRoles({...{}}).then(r => {});
+    }, []);
 
     const handleSubmit = async (event) => {
         // event.preventDefault();
@@ -39,21 +65,22 @@ export default function CreateUser() {
         //     let data = {
         //         name: name,
         //         avatar: avatar,
-        //         type: type,
         //         email: email,
         //         birthday: birthday,
         //         sex: sex,
-        //     };
+        //         password: password,
+        //         roles: checked
+        //     }
 
         // 	const albums = await uploadApi.uploadMultiImg( fileAlbums );
         // 	if(albums?.length > 0) {
         // 		data.avatar = albums[0]
         // 	}
 
-        //     const response = await userApi.create(data);
+        //     const response = await adminApi.create(data);
         //     if (response.status === 'success' || response.status === 200) {
         //         toast("Thêm mới thành công");
-        //         navigate('/user')
+        //         navigate('/admin')
         //     } else {
         //         toast(response?.message || response?.error || 'error');
         //     }
@@ -69,16 +96,14 @@ export default function CreateUser() {
                     <Col>
                         <Breadcrumb>
                             <Breadcrumb.Item href="/article" >
-                                Thành viên
+                                Admin
                             </Breadcrumb.Item>
                             <Breadcrumb.Item active>Thêm mới</Breadcrumb.Item>
                         </Breadcrumb>
                         <div className={'d-flex justify-content-end'}>
-                            <Link className={'btn btn-sm btn-primary'} to={'/user'} >Trở về</Link>
+                            <Link className={'btn btn-sm btn-primary'} to={'/admin'} >Trở về</Link>
                         </div>
-                        <Form noValidate validated={validated}
-                        // onSubmit={handleSubmit}
-                        >
+                        <Form noValidate validated={validated} onSubmit={handleSubmit}>
                             <Row>
                                 <Form.Group as={Col} className="mb-3" controlId="exampleForm.ControlInput1">
                                     <Form.Label>Họ tên</Form.Label>
@@ -123,20 +148,16 @@ export default function CreateUser() {
                                 <Col className={'col-3'}>
                                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                         <Form.Label>Giới tính</Form.Label>
-                                        <Form.Select required className="mb-3" aria-label="Default select example"
+                                        <Form.Control required type="text" name={'sex'} placeholder="Nam"
                                             onChange={event => setSex(event.target.value)}
-                                            value={sex} >
-                                            <option>Select menu</option>
-                                            <option value="Male">Male</option>
-                                            <option value="Female">Female</option>
-                                        </Form.Select>
+                                            value={sex} />
                                     </Form.Group>
                                 </Col>
                                 <Col className={'col-3'}>
                                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                         <Form.Label>Ngày sinh</Form.Label>
                                         <Form.Control required type="date" name={'birthday'} placeholder=""
-                                            //    onChange={event => setBirthday(event.target.value)}
+                                            onChange={event => setBirthday(event.target.value)}
                                             value={birthday} />
                                         <Form.Control.Feedback type="invalid">
                                             Ngày sinh không được để trống
@@ -146,7 +167,7 @@ export default function CreateUser() {
                                 <Col className={'col-3'}>
                                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                         <Form.Label>Loại tài khoản</Form.Label>
-                                        <Form.Control required type="text" name={'type'} placeholder="USER" readOnly value={type} />
+                                        <Form.Control required type="text" name={'type'} placeholder="ADMIN" readOnly value={type} />
                                         <Form.Control.Feedback type="invalid">
                                             Loại tài khoản không được để trống
                                         </Form.Control.Feedback>
@@ -158,7 +179,23 @@ export default function CreateUser() {
                                 <Form.Control type="file" accept="image/*" />
                                 {/* <ImageForm files={ fileAlbums } changes={ change } setChanges={ setChange } setFiles={ setFileAlbums } max={ 1 } /> */}
                             </Form.Group>
-                            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                            <Row>
+                                {roles.map((item, index) => {
+                                    return (
+                                        <Col key={index} className={'col-3'}>
+                                            <Form.Check
+                                                inline
+                                                label={item.name}
+                                                value={item._id}
+                                                // onChange={handleCheck}
+                                                type='checkbox'
+                                                id={`inline-checkbox-${item._id}`}
+                                            />
+                                        </Col>
+                                    )
+                                })}
+                            </Row>
+                            <Form.Group className="mb-3 mt-3" controlId="exampleForm.ControlTextarea1">
                                 <Button type="submit">Lưu dữ liệu</Button>
                             </Form.Group>
                         </Form>

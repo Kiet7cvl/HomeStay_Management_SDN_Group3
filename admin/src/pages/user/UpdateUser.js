@@ -180,6 +180,7 @@ export default function UpdateUser() {
                             </Row>
                             <Form.Group controlId="formFile" className="mb-3">
                                 <Form.Label>Avatar</Form.Label>
+                                <Form.Control type="file" accept="image/*" />
                                 {/* <ImageForm files={ fileAlbums } changes={ change } setChanges={ setChange } setFiles={ setFileAlbums } max={ 1 } /> */}
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
