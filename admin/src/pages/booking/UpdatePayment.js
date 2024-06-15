@@ -62,7 +62,7 @@ export default function UpdateBooking() {
           <Col>
             <Breadcrumb>
               <Breadcrumb.Item href="/booking">Quản lí đặt Phòng</Breadcrumb.Item>
-              <Breadcrumb.Item active>Cập nhật</Breadcrumb.Item>
+              <Breadcrumb.Item active>Cập nhật thanh toán</Breadcrumb.Item>
             </Breadcrumb>
             <div className={"d-flex justify-content-end"}>
               <Link className={"btn btn-sm btn-primary"} to={"/booking"}>

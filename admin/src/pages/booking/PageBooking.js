@@ -148,7 +148,7 @@ export default function PageBooking() {
               </Breadcrumb.Item>
               <Breadcrumb.Item active>Danh sách</Breadcrumb.Item>
             </Breadcrumb>
-            <Table responsive striped bordered hover>
+            <Table responsive striped bordered hover className="mt-4">
               <thead>
                 <tr>
                   <th>#</th>
