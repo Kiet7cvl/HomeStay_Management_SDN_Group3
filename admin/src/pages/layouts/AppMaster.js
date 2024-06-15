@@ -42,11 +42,13 @@ function AppMaster ()
 										<NavLink to="/booking" className={ 'nav-link' }>Quản lý đặt phòng</NavLink>
 										<NavLink to="/article" className={ 'nav-link ' }>Bài viết</NavLink>
 										<NavLink to="/user" className={ 'nav-link' }>Thành viên</NavLink>
-										<NavLink to="/feedback" className={ 'nav-link' }>Đánh giá</NavLink>
+										{/* <NavLink to="/feedback" className={ 'nav-link' }>Đánh giá</NavLink> */}
 										<NavDropdown title="Phân quyền" id="basic-nav-dropdown">
 											<NavLink to="/permission" className={ 'dropdown-item ' }>Permission</NavLink>
 											<NavLink to="/role" className={ 'dropdown-item' }>Role</NavLink>
 											<NavLink to="/admin" className={ 'dropdown-item' }>Admin</NavLink>
+											<NavLink to="/category" className={ 'dropdown-item' }>Danh mục</NavLink>
+											<NavLink to="/room" className={ 'dropdown-item' }>Phòng</NavLink>
 										</NavDropdown>
 									</Nav>
 									<Nav className="d-flex">
