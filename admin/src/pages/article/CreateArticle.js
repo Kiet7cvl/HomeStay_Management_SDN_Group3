@@ -148,7 +148,7 @@ export default function CreateArticle ()
 										} }
 										onReady={(editor) => {
 											editor.editing.view.change(writen => {
-												writen.setStyle('height', '200px', editor.editing.view.document.getRoot())
+												writen.setStyle('height', '150px', editor.editing.view.document.getRoot())
 											})
 										}}
 									/>

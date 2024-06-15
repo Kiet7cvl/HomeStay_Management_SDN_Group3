@@ -25,3 +25,15 @@ code {
   box-shadow: 0 3px 10px 0 rgba(40, 48, 57, 0.8);
   backdrop-filter: blur(5px);
 }
+
+@media (min-width: 1536px) {
+  html {
+    min-width: 1536px;
+  }
+}
+
+/* @media (min-width: 768px) {
+  html {
+    min-width: 768px;
+  }
+} */

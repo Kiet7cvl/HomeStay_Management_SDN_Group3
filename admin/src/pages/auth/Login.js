@@ -59,13 +59,13 @@ export const LoginPage = () =>
 						<Card className="auth-box">
 							<Card.Body className="w-100">
 								<div className="text-center">
-									<h3  className="text-white fs-22">
+									<h3  className="text-white fs-22 pb-2">
 										Đăng nhập quyền Admin
 									</h3>
 								</div>
 								<Form noValidate validated={validated} onSubmit={ handleSubmit }>
 									<Form.Group className="mb-3">
-										<Form.Label className="text-white fs-19">Email: </Form.Label>
+										<Form.Label className="text-white fs-19 d-flex">Email: </Form.Label>
 										<Form.Control required type="email" name={ 'name' } placeholder="Nhập email"
 											onChange={ event =>
 											{
@@ -79,7 +79,7 @@ export const LoginPage = () =>
 									</Form.Group>
 
 									<Form.Group className="mb-3">
-										<Form.Label className="text-white fs-19">Mật khẩu: </Form.Label>
+										<Form.Label className="text-white fs-19 d-flex">Mật khẩu: </Form.Label>
 										<Form.Control required type="password" name={ 'password' } placeholder="Nhập mật khẩu"
 											onChange={ event =>
 											{
