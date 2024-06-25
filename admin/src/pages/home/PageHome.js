@@ -1,52 +1,76 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChartArea, faChartColumn, faChartLine, faChartPie } from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect, useState } from 'react';
 import { Alert, Breadcrumb, Col, Container, Row } from "react-bootstrap";
-// import dashboardApi from '../../services/dashboardService';
 import { Table } from 'react-bootstrap';
 
 export default function PageHome() {
 
 	return (
-		<Container>
-			<Row>
-				<Col>
-					<Alert variant="success">
-						<Alert.Heading>Xin chào</Alert.Heading>
-						<p>Chào mừng bạn đến với hệ thống quản lý khách sạn của chúng tôi</p>
-					</Alert>
-				</Col>
-			</Row>
-			
-			<div>
-            <h2>Booking Statistics by Month</h2>
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>Month</th>
-                        <th>Number of Bookings</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {/* {statistics.map(stat => (
-                        <tr key={stat._id}>
-                            <td>{stat._id}</td>
-                            <td>{stat.count}</td>
-                        </tr>
-                    ))} */}
-                </tbody>
-            </Table>
-        </div>
-			{/* <Row>
-				<Col className={'col-8'}>
-					{loadingChartStatus === false && (
-						<Bar options={options} data={dataChartListDayInMonth} />
-					)}
-				</Col>
-				<Col className={'col-4'}>
-					{loadingChartStatus === false && (
-						<Doughnut data={dataCharStatus} />
-					)}
-				</Col>
-			</Row> */}
-		</Container>
+		<div>
+			<div class="container-fluid  px-4">
+			<h1 className="text-center ">Biểu đồ thống kê</h1>
+				<div class="row pt-2 g-4">
+					<div class="col-sm-6 col-xl-3">
+						<div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+						<FontAwesomeIcon icon={faChartLine} className='fa-3x text-primary'/>
+							<div class="ms-3">
+								<p class="mb-2">Weekly Booking</p>
+								<h6 class="mb-0 fw-bold">10</h6>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6 col-xl-3">
+						<div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+						<FontAwesomeIcon icon={faChartColumn} className='fa-3x text-primary' />
+							<div class="ms-3">
+								<p class="mb-2">Total Booking</p>
+								<h6 class="mb-0 fw-bold">230</h6>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6 col-xl-3">
+						<div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+						<FontAwesomeIcon icon={faChartPie} className='fa-3x text-primary'/>
+							<div class="ms-3">
+								<p class="mb-2">Weekly Revenue</p>
+								<h6 class="mb-0 fw-bold">$1234</h6>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6 col-xl-3">
+						<div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+						<FontAwesomeIcon icon={faChartArea} className='fa-3x text-primary'/>
+							<div class="ms-3">
+								<p class="mb-2">Total Revenue</p>
+								<h6 class="mb-0 fw-bold">$1234</h6>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>	
+			<div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                    <div class="col-sm-12 col-xl-6">
+                        <div class="bg-light text-center rounded p-4">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <h6 class="mb-0">Worldwide Sales</h6>
+                                <a href="">Show All</a>
+                            </div>
+                            <canvas id="worldwide-sales"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-xl-6">
+                        <div class="bg-light text-center rounded p-4">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <h6 class="mb-0">Salse & Revenue</h6>
+                                <a href="">Show All</a>
+                            </div>
+                            <canvas id="salse-revenue"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>	
+		</div >
 	);
 }
