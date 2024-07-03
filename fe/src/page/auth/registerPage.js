@@ -63,9 +63,15 @@ const SignUpPage = () =>
 	return (
 		<div className='bg-auth d-flex'>
 			<Container>
-				<Row className='justify-content-center '>
+				<Row className='justify-content-center ' style={{ paddingTop: '15vh' }}>
 					<Col md={ 6 }>
-						<Card className="auth-box">
+						<Card className="auth-box"
+						style={{
+							// border: none,
+							borderRadius: '10px',
+							backgroundColor: 'rgba(0, 0, 0, 0.5)',
+							boxShadow: '0 0 10px 0 rgba(0,0,0,0.5)',
+							backdropFilter: 'blur(5px)' }}>
 							<Card.Body className="w-100">
 								<div className="text-center">
 									{/* <Link to={ '/' } className={ 'navbar-brand' }>

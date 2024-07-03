@@ -8,12 +8,11 @@ import { useDispatch } from 'react-redux';
 // import { toast } from "react-toastify";
 
 
-export const SignInPage = () =>
-{
-	const [ form, setForm ] = useState( {
+export const SignInPage = () => {
+	const [form, setForm] = useState({
 		email: null,
 		password: null
-	} );
+	});
 
 	const [validated, setValidated] = useState(false);
 
@@ -58,72 +57,77 @@ export const SignInPage = () =>
 	return (
 		<div className='bg-auth d-flex'>
 			<Container>
-				<Row className='justify-content-center '>
-					<Col md={ 6 } lg={ 4 }>
-						<Card className="auth-box">
-							<Card.Body className="w-100">
-								<div className="text-center">
-									{/* <Link to={ '/' } className={ 'navbar-brand' }>
+				<Row className='justify-content-center ' style={{ paddingTop: '25vh' }}>
+					<Col md={6} lg={4}>
+						<Card className="auth-box"
+							style={{
+								// border: none,
+								borderRadius: '10px',
+								backgroundColor: 'rgba(0, 0, 0, 0.5)',
+								boxShadow: '0 0 10px 0 rgba(0,0,0,0.5)',
+								backdropFilter: 'blur(5px)' }}
+								>
+						<Card.Body className="w-100">
+							<div className="text-center">
+								{/* <Link to={ '/' } className={ 'navbar-brand' }>
 										<img src={'/logo.png'} style={{ width: "100px"}} />
 									</Link> */}
-									<h3 className="text-white fs-22">
-										Đăng nhập
-									</h3>
-								</div>
-								<Form noValidate validated={validated} 
-								// onSubmit={ handleSubmit }
-								>
-									<Form.Group className="mb-3">
-										<Form.Label className="text-white fs-19">Email: </Form.Label>
-										<Form.Control required type="email" name={ 'name' } placeholder="Nhập email"
-											onChange={ event =>
-											{
-												let value = event && event.target.value.trim() || null;
-												console.log( value );
-												setField( form, 'email', value, setForm )
-											} }
-											value={ form.email || '' } />
-										<Form.Control.Feedback type="invalid">
-											Email không được để trống.
-										</Form.Control.Feedback>
-									</Form.Group>
+								<h3 className="text-white fs-22">
+									Đăng nhập
+								</h3>
+							</div>
+							<Form noValidate validated={validated}
+							// onSubmit={ handleSubmit }
+							>
+								<Form.Group className="mb-3">
+									<Form.Label className="text-white fs-19">Email: </Form.Label>
+									<Form.Control required type="email" name={'name'} placeholder="Nhập email"
+										onChange={event => {
+											let value = event && event.target.value.trim() || null;
+											console.log(value);
+											setField(form, 'email', value, setForm)
+										}}
+										value={form.email || ''} />
+									<Form.Control.Feedback type="invalid">
+										Email không được để trống.
+									</Form.Control.Feedback>
+								</Form.Group>
 
-									<Form.Group className="mb-3">
-										<Form.Label className="text-white fs-19">Mật khẩu: </Form.Label>
-										<Form.Control required type="password" name={ 'password' } placeholder="Nhập mật khẩu"
-											onChange={ event =>
-											{
-												let value = event && event.target.value.trim() || null
-												setField( form, 'password', value, setForm )
-											} }
-											value={ form.password || '' } />
-										<Form.Control.Feedback type="invalid">
-											Mật khẩu không được để trống.
-										</Form.Control.Feedback>
-									</Form.Group>
+								<Form.Group className="mb-3">
+									<Form.Label className="text-white fs-19">Mật khẩu: </Form.Label>
+									<Form.Control required type="password" name={'password'} placeholder="Nhập mật khẩu"
+										onChange={event => {
+											let value = event && event.target.value.trim() || null
+											setField(form, 'password', value, setForm)
+										}}
+										value={form.password || ''} />
+									<Form.Control.Feedback type="invalid">
+										Mật khẩu không được để trống.
+									</Form.Control.Feedback>
+								</Form.Group>
 
-									<Form.Group className="mb-3 d-flex justify-content-center">
-										<Button type="submit" className='btn btn-primary'>Đăng nhập</Button>
-									</Form.Group>
-								</Form>
-								<div className="mt-4 text-center">
-									<p className="mb-0 text-white">
-										Nếu không có tài khoản ?{ " " }
-										<Link
-											to="/sign-up"
-											className="text-decoration-underline text-white"
-										>
-											{ " " }
-											Đăng ký{ " " }
-										</Link>
-									</p>
-								</div>
-							</Card.Body>
-						</Card>
-					</Col>
+								<Form.Group className="mb-3 d-flex justify-content-center">
+									<Button type="submit" className='btn btn-primary'>Đăng nhập</Button>
+								</Form.Group>
+							</Form>
+							<div className="mt-4 text-center">
+								<p className="mb-0 text-white">
+									Nếu không có tài khoản ?{" "}
+									<Link
+										to="/sign-up"
+										className="text-decoration-underline text-white"
+									>
+										{" "}
+										Đăng ký{" "}
+									</Link>
+								</p>
+							</div>
+						</Card.Body>
+					</Card>
+				</Col>
 
-				</Row>
-			</Container>
-		</div>
+			</Row>
+		</Container>
+		</div >
 	);
 }

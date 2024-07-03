@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 
-const ErrorPage = () => {
-	document.title = 'Đăng ký';
+const ServiceDetailPage = () => {
+	document.title = 'Dịch vụ';
   return (
     <React.Fragment>
-      
-	  
+
+
     </React.Fragment>
   );
 };
 
-export default ErrorPage;
+export default ServiceDetailPage;
