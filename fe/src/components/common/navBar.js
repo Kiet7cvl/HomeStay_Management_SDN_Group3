@@ -45,7 +45,7 @@ export const NavBarPage = () => {
 					</Navbar.Brand>
 
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
-					<Navbar.Collapse id="basic-navbar-nav" style={{ backdropFilter: "blur(5px)" }}>
+					<Navbar.Collapse id="basic-navbar-nav" style={{ backdropFilter: "blur(5px)" }} className="justify-content-between">
 						<Nav className="ml-auto justify-content-end">
 							<NavLink className="nav-link" to="/" style={{ color: 'black' }}>
 								Trang chủ
@@ -53,30 +53,24 @@ export const NavBarPage = () => {
 							<NavLink className="nav-link " to="/room" style={{ color: 'black' }}>
 								Phòng
 							</NavLink>
-							{menus && menus.length > 0 && menus.map((item, index) => {
-								return (
-									<Link to={'/menu/' + item._id} key={item._id} className="nav-link" style={{ color: 'black' }}>
-										{item.name}
-									</Link>
-								)
-							})}
-
-							<NavLink className="nav-link " to="/contact" style={{ color: 'black' }}>
-								Liên hệ
+							<NavLink className="nav-link " to="/menu" style={{ color: 'black' }}>
+								Bài viết
 							</NavLink>
-
-
+							<NavLink className="nav-link " to="/owner" style={{ color: 'black' }}>
+								Cho thuê
+							</NavLink>
 						</Nav>
 						<Nav className="navbar-light">
 							{!checkLogin() ?
-								<NavDropdown title="Đăng nhập" id="basic-nav-dropdown">
-									<Link to="/sign-up" className={'dropdown-item'}>
+								<Nav>
+									<Link to="/sign-up" className="nav-link text-dark">
 										Đăng ký
 									</Link>
-									<Link to="/sign-in" className={'dropdown-item'}>
+									<h5 className="pt-2">/</h5>
+									<Link to="/sign-in" className="nav-link text-dark">
 										Đăng nhập
 									</Link>
-								</NavDropdown >
+								</Nav >
 								: <>
 
 									<NavDropdown title={'Hi, ' + getUser()?.name} id="user-nav-dropdown" className="user-nav">
