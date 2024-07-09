@@ -1,16 +1,16 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
-const modelSchema = new Schema(
-    {
-        name: {
-            type: String,
-            required: 'name cannot be blank'
-        }
+const categorySchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: "name cannot be blank",
     },
-    { timestamps: true },
-    { collection: 'categories' }
+    created_at: { type: Date, default: Date.now },
+  },
+  { collation: "categories " }
 );
 
-module.exports = mongoose.model('Category', modelSchema);
+module.exports = mongoose.model("Category", categorySchema);
