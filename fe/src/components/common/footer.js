@@ -1,11 +1,10 @@
 import React from "react";
-
 import { EnvelopeAt, Map, MapFill, TelephoneFill } from 'react-bootstrap-icons';
-
+import '../../App.css';
 export const Footer = () =>
 {
 	return (
-		<React.Fragment>
+		<React.Fragment  >
 			<footer className="ftco-footer ftco-bg-dark ftco-section pb-0 pt-4">
 				<div className="container">
 					<div className="row mb-5">

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-// import { AuthService } from '../../services/feService/authService';
+import { AuthService } from '../../services/feService/authService';
 import { setField, timeDelay } from '../../common/helper';
 import { useDispatch } from 'react-redux';
-// import { toggleShowLoading } from '../../redux/actions/common';
-// import { toast } from "react-toastify";
+import { toggleShowLoading } from '../../redux/actions/common';
+import { toast } from "react-toastify";
 
 
 export const SignInPage = () => {
@@ -20,40 +20,40 @@ export const SignInPage = () => {
 	const dispatch = useDispatch();
 
 
-	// const handleSubmit = async ( e ) =>
-	// {
-	// 	e.preventDefault();
-	// 	if ( e?.currentTarget?.checkValidity() === false )
-	// 	{
-	// 		e.stopPropagation();
-	// 	} else
-	// 	{
-	// 		dispatch(toggleShowLoading(true))
-	// 		const response = await AuthService.login( form );
-	// 		if ( response?.status === 200 && response?.data )
-	// 		{
-	// 			localStorage.setItem( 'access_token', response.data.accessToken );
-	// 			let user = {
-	// 				name: response.data.user?.name,
-	// 				email: response.data.user?.email,
-	// 				avatar: response.data.user?.avatar,
-	// 				_id: response.data.user?._id,
-	// 				phone:  response.data.user?.phone || null
-	// 			};
-	// 			localStorage.setItem( 'user', JSON.stringify( user ) );
-	// 			toast( 'Đăng nhập thành công!', {type: 'success', autoClose: 900} );
-	// 			await timeDelay( 1000 )
-	// 			window.location.href = '/'
-	// 		} else
-	// 		{
-	// 			toast( response?.message || 'Đăng nhập thất bại', {type: 'error'} )
-	// 		}
-	// 		dispatch(toggleShowLoading(false));
-	// 	}
+	const handleSubmit = async ( e ) =>
+	{
+		e.preventDefault();
+		if ( e?.currentTarget?.checkValidity() === false )
+		{
+			e.stopPropagation();
+		} else
+		{
+			dispatch(toggleShowLoading(true))
+			const response = await AuthService.login( form );
+			if ( response?.status === 200 && response?.data )
+			{
+				localStorage.setItem( 'access_token', response.data.accessToken );
+				let user = {
+					name: response.data.user?.name,
+					email: response.data.user?.email,
+					avatar: response.data.user?.avatar,
+					_id: response.data.user?._id,
+					phone:  response.data.user?.phone || null
+				};
+				localStorage.setItem( 'user', JSON.stringify( user ) );
+				toast( 'Đăng nhập thành công!', {type: 'success', autoClose: 900} );
+				await timeDelay( 1000 )
+				window.location.href = '/'
+			} else
+			{
+				toast( response?.message || 'Đăng nhập thất bại', {type: 'error'} )
+			}
+			dispatch(toggleShowLoading(false));
+		}
 
-	// 	setValidated(true);
+		setValidated(true);
 
-	// }
+	}
 	return (
 		<div className='bg-auth d-flex'>
 			<Container>
@@ -77,7 +77,7 @@ export const SignInPage = () => {
 								</h3>
 							</div>
 							<Form noValidate validated={validated}
-							// onSubmit={ handleSubmit }
+							onSubmit={ handleSubmit }
 							>
 								<Form.Group className="mb-3">
 									<Form.Label className="text-white fs-19">Email: </Form.Label>

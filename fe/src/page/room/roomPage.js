@@ -76,9 +76,9 @@ const RoomPage = () =>
 				setCategories={setCategories}
 			/>
 
-
-
+		
 		</React.Fragment>
+		
 	);
 };
 

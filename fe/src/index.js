@@ -11,6 +11,8 @@ import rootReducer from "./redux/rootReducer";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import "react-image-gallery/styles/css/image-gallery.css";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const store = createStore(
 	rootReducer,

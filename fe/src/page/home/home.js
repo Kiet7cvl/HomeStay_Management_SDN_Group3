@@ -2,44 +2,46 @@ import React, { useEffect, useState } from "react";
 import { CarouselImg } from "../../components/common/carosel";
 import { RoomList } from "../../components/room-service/roomList";
 import { BlogList } from "../../components/blog/blogList";
-// import { RoomService } from "../../services/feService/roomService";
-// import { ArticleService } from "../../services/feService/articleService";
+import { RoomService } from "../../services/feService/roomService";
+import { ArticleService } from "../../services/feService/articleService";
 import { defaultA, defaultB } from "../../common/constant";
 import { BookmarkStar } from "react-bootstrap-icons";
 
 const Home = () => {
 	document.title = 'Trang chủ';
-	const [rooms, setRooms] = useState([]);
-	const [article, setArticle] = useState([]);
-	// useEffect( () =>
-	// {
-	// 	getRooms();
-	// 	getArticles();
-	// }, [] );
 
-	// const getRooms = async () =>
-	// {
-	// 	const rs = await RoomService.getDataList( { page: 1, page_size: 6, status: 1 } );
-	// 	if ( rs?.status === 200 )
-	// 	{
-	// 		setRooms( rs?.data?.rooms || [] )
-	// 	} else
-	// 	{
-	// 		setRooms( [] );
-	// 	}
-	// };
+	const [ rooms, setRooms ] = useState( [] );
+	const [ article, setArticle ] = useState( [] );
+	useEffect( () =>
+	{
+		getRooms();
+		getArticles();
+	}, [] );
 
-	// const getArticles = async () =>
-	// {
-	// 	const rs = await ArticleService.getDataList( { page: 1, page_size: 4, status: 1 } );
-	// 	if ( rs?.status === 200 )
-	// 	{
-	// 		setArticle( rs?.data?.articles || [] )
-	// 	} else
-	// 	{
-	// 		setArticle( [] );
-	// 	}
-	// };
+
+	const getRooms = async () =>
+	{
+		const rs = await RoomService.getDataList( { page: 1, page_size: 6, status: 1 } );
+		if ( rs?.status === 200 )
+		{
+			setRooms( rs?.data?.rooms || [] )
+		} else
+		{
+			setRooms( [] );
+		}
+	};
+
+	const getArticles = async () =>
+	{
+		const rs = await ArticleService.getDataList( { page: 1, page_size: 4, status: 1 } );
+		if ( rs?.status === 200 )
+		{
+			setArticle( rs?.data?.articles || [] )
+		} else
+		{
+			setArticle( [] );
+		}
+	};
 	return (
 		<React.Fragment>
 
