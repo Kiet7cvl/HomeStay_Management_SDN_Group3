@@ -10,6 +10,12 @@ import RoomDetailPage from "../page/room/roomDetailPage";
 import { BlogDetail } from "../components/blog/blogDetail";
 import { FormBooking } from "../components/form/formBooking";
 import { BookingPage } from "../page/others/BookingPage";
+import PricingPage from "../page-owner/pricing";
+import ReservationPage from "../page-owner/reservations";
+import TransactionPage from "../page-owner/transaction";
+import RoomLissPage from "../page-owner/roomList";
+import RoomCreatePage from "../page-owner/roomCreate";
+import RoomDetail from "../page-owner/roomDetail";
 // import { PaymentStatus } from "../components/booking/paymentStatus";
 // import  {PaymentPage}  from "../page/others/paymentPage.js";
 
@@ -86,6 +92,7 @@ export const Routers = [
 	// 	// other
 	{
 		path: "/home",
+		title: 'HomePage',
 		component: <Home />
 	},
 	{
@@ -93,6 +100,41 @@ export const Routers = [
 		title: 'Thông tin tài khoản',
 		component: <ProfilePage />
 	},
+	{
+		path: "/become-owner",
+		title: 'Trở thành Owner',
+		component: <PricingPage />
+	},
+	{
+		path: "/owner/reservations",
+		title: 'Đặt phòng',
+		component: <ReservationPage />
+	},
+	{
+		path: "/owner/transaction_history",
+		title: 'Thu nhập',
+		component: < TransactionPage/>
+	},
+	{
+		path: "/owner/room-list",
+		title: 'Phòng cho thuê',
+		component: < RoomLissPage />
+	},
+	{
+		path: "/owner/room-detail",
+		title: 'Chi tiết phòng',
+		component: < RoomDetail />
+	},
+	{
+		path: "/owner/room-create",
+		title: 'Cho thuê mới ',
+		component: <RoomCreatePage />
+	},
+	// {
+	// 	path: "/account",
+	// 	title: 'Thông tin tài khoản',
+	// 	component: <ProfilePage />
+	// },
 	{ path: "/", component: <Home /> },
 	{ path: "/error", component: <ErrorPage /> },
 

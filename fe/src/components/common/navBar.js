@@ -56,9 +56,17 @@ export const NavBarPage = () => {
 							<NavLink className="nav-link " to="/menu" style={{ color: 'black' }}>
 								Bài viết
 							</NavLink>
-							<NavLink className="nav-link " to="/owner" style={{ color: 'black' }}>
-								Cho thuê
+
+							<NavLink className="nav-link " to="/become-owner" style={{ color: 'black' }}>
+								Đăng kí cho thuê
 							</NavLink>
+
+							<NavDropdown title={<span style={{ color: 'black' }}>Cho thuê</span>} id="owner-nav-dropdown" className="owner-nav">
+								<Link to="/owner/reservations" className={'dropdown-item'}>Đặt phòng</Link>
+								<Link to="/owner/room-list" className={'dropdown-item'}>Danh sách cho thuê</Link>
+								<Link to="/owner/transaction_history" className={'dropdown-item'}>Thu nhập</Link>
+								<Link to="/owner/room-create" className={'dropdown-item'}>Cho thuê mới</Link>
+							</NavDropdown>
 						</Nav>
 						<Nav className="navbar-light">
 							{!checkLogin() ?

@@ -7,28 +7,10 @@ import { BlogList } from "../../components/blog/blogList";
 import { defaultA, defaultB } from "../../common/constant";
 import { BookmarkStar } from "react-bootstrap-icons";
 
-const carouselImg = [
-	{
-		_id: 1,
-		avatar: defaultA,
-		title: 'Welcome To Deluxe',
-		content: 'Hotels & Resorts',
-		class: ''
-	},
-	{
-		_id: 2,
-		avatar: defaultB,
-		title: 'Welcome To Deluxe',
-		content: 'Hotels & Resorts',
-		class: ''
-	},
-]
-
-const Home = () =>
-{
+const Home = () => {
 	document.title = 'Trang chủ';
-	const [ rooms, setRooms ] = useState( [] );
-	const [ article, setArticle ] = useState( [] );
+	const [rooms, setRooms] = useState([]);
+	const [article, setArticle] = useState([]);
 	// useEffect( () =>
 	// {
 	// 	getRooms();
@@ -60,13 +42,25 @@ const Home = () =>
 	// };
 	return (
 		<React.Fragment>
-			<CarouselImg data={carouselImg}/>
-			<RoomList data={ rooms } isShowLink={ true } size={3} />
+
+			<div className="hero-wrap" style={{ backgroundImage: `url(${defaultA})`, height: "200px", backgroundSize: "900px 200px" }} >
+				<div className="overlay"></div>
+				<div className="container">
+					<div className="row no-gutters slider-text d-flex align-item-end justify-content-center">
+						<div className="col-md-9 text-center d-flex align-items-end justify-content-center">
+							<div className="text">
+								<h1 className="mb-4 bread">HomePage</h1>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<RoomList data={rooms} isShowLink={true} size={3} />
 			{
-				article && <BlogList title={'Tin tức'} data={ article } isShowLink={ true } />
+				article && <BlogList title={'Tin tức'} data={article} isShowLink={true} />
 			}
-			
-		
+
+
 		</React.Fragment>
 	);
 };
