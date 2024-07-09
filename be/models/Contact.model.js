@@ -27,7 +27,7 @@ const contactSchema = new Schema(
     },
     create_at: { type: Date, default: Date.now },
   },
-  { collation: "conteacts" }
+  { collection: "contact" }
 );
 
 module.exports = mongoose.model("Contact", contactSchema);

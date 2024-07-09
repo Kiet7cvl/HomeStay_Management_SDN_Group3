@@ -6,7 +6,7 @@ const userSchema = new Schema(
   {
     name: {
       type: String,
-      require: "name cannot be blank",
+      required: "name cannot be blank",
     },
     email: {
       type: String,
@@ -32,7 +32,7 @@ const userSchema = new Schema(
     },
     password: {
       type: String,
-      require: "password cannot be blank",
+      required: "password cannot be blank",
     },
     avatar: {
       type: String,
@@ -57,8 +57,20 @@ const userSchema = new Schema(
         ref: "Role",
       },
     ],
+    purchase_count: {
+      type: Number,
+      default: 0
+    },
+    experience_points: {
+      type: Number,
+      default: 0,
+    },
+    level: {
+      type: Number,
+      default: 0
+    },
   },
   { collection: "user" }
 );
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.models.User || mongoose.model("User", userSchema);
