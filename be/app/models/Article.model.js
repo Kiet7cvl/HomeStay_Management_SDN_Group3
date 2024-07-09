@@ -24,7 +24,7 @@ const articleSchema = new Schema(
     },
     create_at: { type: Date, default: Date.now },
   },
-  { collation: "articles" }
+  { collection: "articles" }
 );
 
 module.exports =

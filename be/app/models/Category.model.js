@@ -10,7 +10,7 @@ const categorySchema = new Schema(
     },
     created_at: { type: Date, default: Date.now },
   },
-  { collation: "categories " }
+  { collection: "categories " }
 );
 
 module.exports = mongoose.model("Category", categorySchema);

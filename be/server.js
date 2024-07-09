@@ -4,7 +4,7 @@ const morgan = require('morgan');
 const httpErrors = require('http-errors');
 const bodyParser = require('body-parser');
 const db = require('./app/models');
-const { UserRouter , Auth} = require('./routes/index')
+const { UserRouter , AuthRouter, RoomRouter} = require('./routes/index')
 //Khoi tao express web server
 const app = express();
 
@@ -21,8 +21,8 @@ app.get('/', (req, res) => {
 
 
 //Tiep nhan cac request tu client
-app.use('/', Auth);
-
+app.use('/', AuthRouter);
+app.use('/room', RoomRouter)
 
 app.use(async (req, res, next) => {
     next(httpErrors.NotFound());
