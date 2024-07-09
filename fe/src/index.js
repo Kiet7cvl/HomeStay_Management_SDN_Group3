@@ -10,6 +10,7 @@ import { createStore } from "redux";
 import rootReducer from "./redux/rootReducer";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import 'react-toastify/dist/ReactToastify.css';
 
 const store = createStore(
 	rootReducer,

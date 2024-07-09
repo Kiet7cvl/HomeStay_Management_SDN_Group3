@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { setField, timeDelay } from "../../common/helper";
 import { Link, useNavigate } from "react-router-dom";
-// import { AuthService } from "../../services/feService/authService";
+import { AuthService } from "../../services/feService/authService";
 import { useDispatch } from "react-redux";
-// import { toggleShowLoading } from "../../redux/actions/common";
-// import { toast } from "react-toastify";
+import { toggleShowLoading } from "../../redux/actions/common";
+import { toast } from "react-toastify";
 
 const SignUpPage = () =>
 {
@@ -26,38 +26,38 @@ const SignUpPage = () =>
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	// const handleSubmit = async ( e ) =>
-	// {
-	// 	e.preventDefault();
-	// 	if ( e?.currentTarget?.checkValidity() === false )
-	// 	{
-	// 		e.stopPropagation();
-	// 	} else
-	// 	{
-	// 		dispatch(toggleShowLoading(true))
-	// 		console.log('---------------- FORM: ', form);
-	// 		form.sex = sex;
-	// 		const response = await AuthService.register( form );
-	// 		if ( response?.status === 200 && response?.data )
-	// 		{
+	const handleSubmit = async ( e ) =>
+	{
+		e.preventDefault();
+		if ( e?.currentTarget?.checkValidity() === false )
+		{
+			e.stopPropagation();
+		} else
+		{
+			dispatch(toggleShowLoading(true))
+			console.log('---------------- FORM: ', form);
+			form.sex = sex;
+			const response = await AuthService.register( form );
+			if ( response?.status === 200 && response?.data )
+			{
 
-	// 			toast( 'Đăng ký thành công!', {type: 'success', autoClose: 900} );
-	// 			await timeDelay( 1000 );
-	// 			dispatch(toggleShowLoading(false))
-	// 			navigate( '/sign-in' );
-	// 		} else
-	// 		{
-	// 			toast( response?.message || response?.error  || 'Đăng ký thất bại', {type: 'error'} )
-	// 		}
-	// 		dispatch(toggleShowLoading(false))
-	// 	}
+				toast( 'Đăng ký thành công!', {type: 'success', autoClose: 900} );
+				await timeDelay( 1000 );
+				dispatch(toggleShowLoading(false))
+				navigate( '/sign-in' );
+			} else
+			{
+				toast( response?.message || response?.error  || 'Đăng ký thất bại', {type: 'error'} )
+			}
+			dispatch(toggleShowLoading(false))
+		}
 
-	// 	setValidated( true );
-	// }
+		setValidated( true );
+	}
 
-	// const handleChangeSex = (event) => {
-	// 	setSex(event.target.value);
-	// }
+	const handleChangeSex = (event) => {
+		setSex(event.target.value);
+	}
 
 
 	return (
@@ -82,7 +82,7 @@ const SignUpPage = () =>
 									</h3>
 								</div>
 								<Form noValidate validated={ validated }
-                                //  onSubmit={ handleSubmit }
+                                 onSubmit={ handleSubmit }
                                  >
 									<Row>
 										<Form.Group className="mb-3 col-12">

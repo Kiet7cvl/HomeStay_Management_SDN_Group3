@@ -20,12 +20,13 @@ export const CarouselImg = ( props ) =>
 						props.data.map( ( item, key ) =>
 						{
 							return <Carousel.Item key={key}>
-								<img
+								{/* <img
 									className="d-block w-100"
 									style={ { height: '400px' } }
 									src={ item.avatar || DEFAULT_IMG }
 									alt="First slide"
 								/>
+								 */}
 								<Carousel.Caption>
 									<h3>{item.title || ''}</h3>
 									<p>{item.content || ''}</p>

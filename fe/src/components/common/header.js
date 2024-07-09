@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Route, Routes, Navigate, Link } from "react-router-dom";
 import { NavBarPage } from "./navBar";
 // import img2 from "../../assets/images/bg_2.jpg";
-// import img1 from "../../assets/images/bg_1.jpg";
+import img1 from "../../assets/images/bg_1.jpg";
 import { Carousel } from "react-bootstrap";
 // import { defaultA } from "../../common/constant";
 
@@ -27,9 +27,9 @@ const Header = ( props ) =>
 			<NavBarPage />
 			{ name !== null &&
 				<div className="hero-wrap" 
-				// style={ {
-				// 	backgroundImage: `url(${ defaultA })`
-				// } }
+				style={ {
+					backgroundImage: `url(${ '/assets/images/bg_1.jpg' })`
+				} }
 				>
 					<div className="overlay"></div>
 					<div className="container">
