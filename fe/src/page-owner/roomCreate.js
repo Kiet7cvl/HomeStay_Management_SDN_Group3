@@ -3,14 +3,14 @@ import { Breadcrumb, Button, Col, Container, Form, Row } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-// import roomApi from '../../services/roomService';
+import {RoomService} from '../services/feService/roomService';
 // import uploadApi from "../../services/uploadService";
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 // import { DEFAULT_IMG, onErrorImg, readFile } from '../../common/common';
 // import { CloseOutlined, PlusOutlined, ReloadOutlined } from '@ant-design/icons'
 // import ImageForm from '../../common/form/imageForm';
-// import categoryApi from "../../services/categoryService";
+import {categoryService} from "../services/feService/categoryService";
 
 
 const RoomCreatePage = () => {
@@ -42,61 +42,61 @@ const RoomCreatePage = () => {
 	const navigate = useNavigate();
 
 	const handleSubmit = async (event) => {
-		// event.preventDefault();
-		// const form = event.currentTarget;
-		// if (form.checkValidity() === false) {
-		// 	event.stopPropagation();
-		// } else {
-		// 	let data = {
-		// 		name: name,
-		// 		avatar: null,
-		// 		price: price,
-		// 		bed: bed,
-		// 		size: size,
-		// 		room_content: room_content,
-		// 		floors: floors,
-		// 		room_code: room_code,
-		// 		category_id: category_id,
-		// 	}
+		event.preventDefault();
+		const form = event.currentTarget;
+		if (form.checkValidity() === false) {
+			event.stopPropagation();
+		} else {
+			let data = {
+				name: name,
+				avatar: null,
+				price: price,
+				bed: bed,
+				size: size,
+				room_content: room_content,
+				floors: floors,
+				room_code: room_code,
+				category_id: category_id,
+			}
 
-		// 	const avatarUpload = await uploadApi.uploadFile(file);
-		// 	const albums = await uploadApi.uploadMultiImg(fileAlbums);
-		// 	console.log('---------- avatarUpload: ', avatarUpload);
-		// 	console.log('---------- AlbumUpload: ', albums);
-		// 	if (avatarUpload) data.avatar = avatarUpload;
-		// 	if (albums.length > 0) data.albums = albums;
-		// 	console.log('------- data: ', data);
+			// const avatarUpload = await uploadApi.uploadFile(file);
+			// const albums = await uploadApi.uploadMultiImg(fileAlbums);
+			// console.log('---------- avatarUpload: ', avatarUpload);
+			// console.log('---------- AlbumUpload: ', albums);
+			// if (avatarUpload) data.avatar = avatarUpload;
+			// if (albums.length > 0) data.albums = albums;
+			// console.log('------- data: ', data);
 
-		// 	const response = await roomApi.createRoom(data);
-		// 	if (response.status === 'success' || response.status === 200) {
-		// 		toast("Thêm mới thành công");
-		// 		navigate('/room')
-		// 	} else {
-		// 		toast(response?.message || response?.error || 'error');
-		// 	}
-		// }
+			const response = await RoomService.createRoom(data);
+			if (response.status === 'success' || response.status === 200) {
+				toast("Thêm mới thành công");
+				navigate('/room')
+			} else {
+				toast(response?.message || response?.error || 'error');
+			}
+		}
 
-		// setValidated(true);
+		setValidated(true);
 	};
 
 	const handleUpload = (event) => {
-		// 	if (event && event.target.files[0]) setFile(event.target.files[0]);
-		// }
-		// const getListsMenu = async () => {
-		// 	const response = await categoryApi.getLists({
-		// 		page_size: 1000
-		// 	})
-		// 	if (response?.status === 'success' || response?.status === 200) {
-		// 		setCategories(response.data.categories);
-		// 	}
+			if (event && event.target.files[0]) setFile(event.target.files[0]);
+		}
+		const getListsMenu = async () => {
+			const response = await categoryService.getDataList({
+				page_size: 1000
+			})
+			if (response?.status === 'success' || response?.status === 200) {
+				setCategories(response.data.categories);
+			}
 	}
 
 	const handleChangeMenu = (event) => {
-		// setCategoryId(event.target.value);
+		setCategoryId(event.target.value);
 	}
 
 	useEffect(() => {
-		// getListsMenu({ ...params }).then(r => { });
+		getListsMenu({ ...params }).then(r => { });
 	}, []);
 
 	return (

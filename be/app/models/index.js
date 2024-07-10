@@ -1,6 +1,7 @@
 
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
+
 const User = require('./User.model');
 const Role = require('./Role.model');
 const Article = require('./Article.model');
@@ -9,6 +10,7 @@ const Contact = require('./Contact.model');
 const Room = require('./Room.model');
 const Vote = require('./Vote.model');
 const Category = require('./Category.model');
+const Princing = require('./Princing.model');
 
 const db = {};
 
@@ -21,6 +23,7 @@ db.contact = Contact;
 db.room = Room;
 db.vote = Vote;
 db.category = Category;
+db.princing = Princing;
 
 db.ROLES = ["ADMIN", "OWNER", "USER"];
 

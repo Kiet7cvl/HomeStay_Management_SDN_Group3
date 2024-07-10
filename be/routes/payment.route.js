@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { createMoMoPayment } = require('../controller/common/momoPayment');
+const { createMoMoPayment } = require('../app/controllers/momoPayment');
 
 router.post('/momo', createMoMoPayment);
 

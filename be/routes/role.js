@@ -12,5 +12,6 @@ router.post('/role/store',isAuth,roleBuilder.store);
 router.put('/role/update/:id',isAuth,roleBuilder.update);
 router.delete('/role/:id',isAuth,roleBuilder.delete);
 
+
 module.exports = router;
 

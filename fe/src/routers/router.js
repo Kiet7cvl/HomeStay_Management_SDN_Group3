@@ -34,7 +34,7 @@ export const Routers = [
 		title: 'Chi tiết phòng',
 		component: <RoomDetailPage />
 	},
-	// 	// menu
+	// menu
 	{
 		path: "/menu/:id",
 		title: 'Menu',

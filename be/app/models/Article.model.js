@@ -15,18 +15,12 @@ const articleSchema = new Schema(
     description: {
       type: String,
     },
-    menu_id: { type: String, required: "menu_id cannot be blank" },
     article_content: {
       type: String,
     },
-    menu: {
-      type: mongoose.Types.ObjectId,
-      ref: "Menu",
-    },
     create_at: { type: Date, default: Date.now },
   },
-  { collation: "articles" }
+  { collection: "articles" }
 );
 
-module.exports =
-  mongoose.models.Article || mongoose.model("Article", articleSchema);
+module.exports = mongoose.models.Article || mongoose.model("Article", articleSchema);

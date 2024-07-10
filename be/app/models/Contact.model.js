@@ -28,7 +28,7 @@ const contactSchema = new Schema(
     },
     create_at: { type: Date, default: Date.now },
   },
-  { collection: "conteacts" }
+  { collection: "contacts" }
 );
 
 module.exports = mongoose.model("Contact", contactSchema);
