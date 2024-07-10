@@ -6,7 +6,7 @@ var cors = require('cors')
 const httpErrors = require('http-errors');
 const bodyParser = require('body-parser');
 const db = require('./app/models');
-const { UserRouter , Auth} = require('./routes/index')
+const { UserRouter , Auth, Payment} = require('./routes/index')
 
 //Khoi tao express web server
 const app = express();
@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
 
 //Tiep nhan cac request tu client
 app.use('/', Auth);
-app.use('/api', require('./routes'));
+// app.use('/api/payments', Payment);
 
 app.use(async (req, res, next) => {
     next(httpErrors.NotFound());
