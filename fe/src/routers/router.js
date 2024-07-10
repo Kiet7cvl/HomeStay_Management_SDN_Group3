@@ -90,6 +90,7 @@ export const Routers = [
 	// 	},
 
 	// 	// other
+	
 	{
 		path: "/home",
 		title: 'HomePage',

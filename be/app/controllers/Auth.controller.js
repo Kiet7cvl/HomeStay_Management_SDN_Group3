@@ -50,7 +50,7 @@ exports.login = async ( req, res ) =>
 	try
 	{
 		const email = req.body.email.toLowerCase();
-		const user = await User.findOne( { email: email } );
+		const user = await User.findOne( { email: email } ).populate("roles");
 		if ( !user ) return res.status( 200 ).json( { data: 'Tài khoản không tồn tại', status: 403 } );
 
 		const isPasswordValid = bcrypt.compareSync( req.body.password, user.password );
@@ -58,12 +58,13 @@ exports.login = async ( req, res ) =>
 		{
 			return res.status( 200 ).json( { message: 'Mật khẩu không chính xác', status: 403 } );
 		}
-
+        console.log(user);
 		const accessTokenLife = process.env.ACCESS_TOKEN_LIFE;
 		const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET;
 
 		const dataForAccessToken = {
 			email: user.email,
+			roles: user.roles[0]?.name
 		};
 		const accessToken = await this.generateToken(
 			dataForAccessToken,

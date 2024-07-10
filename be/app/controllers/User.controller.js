@@ -44,7 +44,7 @@ exports.show = async (req, res) => {
         return res.status(200).json({ data: user, status : 200 });
     } catch {
         res.status(404)
-        res.send({ error: "Article doesn't exist!" })
+        res.send({ error: "User doesn't exist!" })
     }
 };
 

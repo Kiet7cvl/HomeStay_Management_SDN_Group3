@@ -38,7 +38,9 @@ export const SignInPage = () => {
 					email: response.data.user?.email,
 					avatar: response.data.user?.avatar,
 					_id: response.data.user?._id,
-					phone:  response.data.user?.phone || null
+					phone:  response.data.user?.phone || null,
+					type: response.data.user?.type,
+					roles: response.data.user?.roles[0]?.name,
 				};
 				localStorage.setItem( 'user', JSON.stringify( user ) );
 				toast( 'Đăng nhập thành công!', {type: 'success', autoClose: 900} );
