@@ -12,12 +12,11 @@ const roleSchema = new Schema(
       type: String,
       required: "description cannot be blank",
     },
-    premission: [{ type: mongoose.Schema.Types.ObjectId, ref: "Permission" }],
     admins: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     owners: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     created_at: { type: Date, default: Date.now },
   },
-  { collation: "roles" }
+  { collection: "roles" }
 );
 
 module.exports = mongoose.models.Role || mongoose.model("Role", roleSchema);
