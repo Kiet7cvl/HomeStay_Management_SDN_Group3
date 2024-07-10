@@ -81,9 +81,9 @@ exports.updatePaymentStatus = async (req, res) => {
     try {
         const booking = await Booking.findOne({ _id: req.params.id });
 
-        if (req.body.status_payment) {
-            booking.status_payment = req.body.status_payment;
-        }
+        // if (req.body.status_payment) {
+        //     booking.status_payment = req.body.status_payment;
+        // }
 
         await booking.save();
         return res.status(200).json({ data: booking, status: 200 });

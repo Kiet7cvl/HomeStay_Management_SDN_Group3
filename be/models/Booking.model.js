@@ -14,7 +14,7 @@ const bookingSchema = new Schema(
     price: { type: Number, required: "room_id cannot be blank" },
     total_money: { type: Number, required: "room_id cannot be blank" },
     amount_of_people: { type: Number, required: "room_id cannot be blank" },
-    payment_type: { type: Number, required: "payment_type cannot be blank" },
+    payment_type: { type: Number, required: "payment_type cannot be blank" },              
     note: { type: String },
     check_in: { type: Date, required: "room_id cannot be blank" },
     check_out: { type: Date, required: "room_id cannot be blank" },

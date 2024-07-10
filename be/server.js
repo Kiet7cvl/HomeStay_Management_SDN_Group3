@@ -20,9 +20,10 @@ app.get('/', (req, res) => {
 });
 
 
+
 //Tiep nhan cac request tu client
 // app.use('/', Auth);
-
+app.use('/api', require('./routes'));
 
 app.use(async (req, res, next) => {
     next(httpErrors.NotFound());
