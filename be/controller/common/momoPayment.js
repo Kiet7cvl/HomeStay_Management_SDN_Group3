@@ -11,7 +11,7 @@ const createMoMoPayment = async (req, res) => {
     const redirectUrl = process.env.MOMO_REDIRECT_URL;
     const ipnUrl = process.env.MOMO_IPN_URL;
 
-    const requestType = 'payWithMethod';
+    const requestType = "captureWallet";
     const orderId = partnerCode + new Date().getTime();
     const requestId = orderId;
     const extraData = '';
