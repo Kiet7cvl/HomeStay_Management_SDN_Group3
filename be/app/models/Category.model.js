@@ -1,3 +1,4 @@
+
 const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
@@ -10,7 +11,7 @@ const categorySchema = new Schema(
     },
     created_at: { type: Date, default: Date.now },
   },
-  { collation: "categories " }
+  { collection: "categories " }
 );
 
 module.exports = mongoose.model("Category", categorySchema);

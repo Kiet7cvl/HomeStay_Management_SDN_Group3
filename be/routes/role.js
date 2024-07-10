@@ -1,3 +1,4 @@
+
 var express = require('express');
 var router = express.Router();
 
@@ -12,3 +13,4 @@ router.put('/role/update/:id',isAuth,roleBuilder.update);
 router.delete('/role/:id',isAuth,roleBuilder.delete);
 
 module.exports = router;
+

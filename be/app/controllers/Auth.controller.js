@@ -1,3 +1,4 @@
+
 const User = require( "./../models/User.model" ) // new
 const bcrypt = require( 'bcryptjs' );
 
@@ -218,3 +219,4 @@ exports.generateToken = async ( payload, secretSignature, tokenLife ) =>
 //         return false;
 //     }
 // };
+

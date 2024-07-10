@@ -1,3 +1,4 @@
+
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 const User = require('./User.model');
@@ -5,9 +6,9 @@ const Role = require('./Role.model');
 const Article = require('./Article.model');
 const Booking = require('./Booking.model');
 const Contact = require('./Contact.model');
-const Menu = require('./Menu.model');
 const Room = require('./Room.model');
 const Vote = require('./Vote.model');
+const Category = require('./Category.model');
 
 const db = {};
 
@@ -17,11 +18,11 @@ db.role = Role;
 db.article = Article;
 db.booking = Booking;
 db.contact = Contact;
-db.menu = Menu;
 db.room = Room;
 db.vote = Vote;
+db.category = Category;
 
-db.ROLES = ["ADMIN", "USER"];
+db.ROLES = ["ADMIN", "OWNER", "USER"];
 
 db.connectDB = async () => {
     mongoose.connect(process.env.MONGO_URI, {

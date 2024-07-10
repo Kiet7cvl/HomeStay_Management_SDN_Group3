@@ -1,3 +1,4 @@
+
 const { mongo, default: mongoose } = require("mongoose");
 
 const { Schema } = mongoose;
@@ -21,7 +22,6 @@ const voteSchema = new Schema(
     },
     create_at: { type: Date, default: Date.now },
   },
-  { collation: "vote" }
+  { collection: "vote" }
 );
-
 module.exports = mongoose.models.Vote || mongoose.model("Vote", voteSchema);

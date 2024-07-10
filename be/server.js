@@ -12,6 +12,7 @@ const { UserRouter , Auth, Payment} = require('./routes/index')
 const app = express();
 app.use(cors());
 
+
 //Bo sung cac middleware kiem soat hoat dong cua client toi sebserver
 app.use(bodyParser.json());
 app.use(morgan("dev"));
@@ -25,8 +26,11 @@ app.get('/', (req, res) => {
 
 
 //Tiep nhan cac request tu client
+
 app.use('/', Auth);
 // app.use('/api/payments', Payment);
+app.use('/', AuthRouter);
+app.use('/room', RoomRouter)
 
 app.use(async (req, res, next) => {
     next(httpErrors.NotFound());

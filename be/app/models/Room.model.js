@@ -1,3 +1,4 @@
+
 const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
@@ -53,7 +54,7 @@ const roomSchema = new Schema(
     },
     create_at: { type: Date, default: Date.now },
   },
-  { collection: "room" }
+  { collection: "rooms" }
 );
 
 module.exports = mongoose.models.Room || mongoose.model("Room", roomSchema);

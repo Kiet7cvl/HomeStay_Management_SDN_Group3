@@ -1,3 +1,4 @@
+
 var express = require('express');
 var router = express.Router();
 const authBuilder = require('../app/controllers/Auth.controller');
@@ -14,3 +15,4 @@ router.put('/profile',isAuth, authBuilder.updateInfo);
 router.put('/change-password',isAuth, authBuilder.changePassword);
 
 module.exports = router;
+
