@@ -50,8 +50,32 @@ const createArticle = async (req, res) => {
     console.error(err.message);
     res.status(500).send({ error: "Internal Server Error" });
   }
+};
 
+const updateArticle = async (req, res) => {
+  try {
+    const article = await Article.findByIdAndUpdate(req.params.id
+      , {
+        name: req.body.name,
+        avatar: req.body.avatar,
+        description: req.body.description,
+        menu_id: req.body.menu_id,
+        article_content: req.body.article_content,
+      }
+      , { new: true });
+    if (!article) {
+      return res.status(404).send({ error: "Article doesn't exist!" });
+    }
+    res.status(200).json({ data: article, status: 200 });
+  }
+  catch (err) {
+    console.error(err.message);
+    res.status(500).send({ error: "Internal Server Error" });
+  }
 }
 
-
-module.exports = { listArticles, getArticle };
+module.exports = { 
+  listArticles, 
+  getArticle,
+  createArticle,
+  updateArticle,};

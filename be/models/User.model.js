@@ -10,25 +10,9 @@ const userSchema = new Schema(
     },
     email: {
       type: String,
-      validate: {
-        validator: function (checkEmail) {
-          return /.+\@.+\..+/.test(checkEmail);
-        },
-        message: (props) => `${props.value} is not a valid email`, // Thông báo lỗi khi định dạng email không hợp lệ
-      },
-      required: [true, "User email required"],
     },
     phone: {
       type: String,
-      validate: {
-        validator: function (phoneNumber) {
-          return /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/.test(
-            phoneNumber
-          );
-        },
-        message: (props) => `${props.value} is not a valid phone number`,
-      },
-      required: [true, "User phone number required"],
     },
     password: {
       type: String,
