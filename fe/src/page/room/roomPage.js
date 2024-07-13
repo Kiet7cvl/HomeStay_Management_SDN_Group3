@@ -7,58 +7,49 @@ import { useSearchParams } from "react-router-dom";
 import { INIT_PAGING } from "../../common/constant";
 import { OtherService } from "../../services/feService/otherService";
 
-const RoomPage = () =>
-{
+const RoomPage = () => {
 	document.title = 'Booking | room list';
 
-	const [ data, setData ] = useState( [] );
-	const [ categories, setCategories ] = useState( [] );
-	const [ paging, setPaging ] = useState( INIT_PAGING );
-	const [ params, setParams ] = useState( {
+	const [data, setData] = useState([]);
+	const [categories, setCategories] = useState([]);
+	const [paging, setPaging] = useState(INIT_PAGING);
+	const [params, setParams] = useState({
 		size: null,
 		bed: null,
 		vote_number: null,
 		name: null,
 		price: null,
 		category_id: null
-	} );
-
+	});
+	console.log(data);
 	const dispatch = useDispatch();
-	let [ searchParams, setSearchParams ] = useSearchParams( {} );
-	useEffect( () =>
-	{
-		getDataList( { page: 1, page_size: INIT_PAGING.page_size } );
-	}, [] );
+	let [searchParams, setSearchParams] = useSearchParams({});
+	useEffect(() => {
+		getDataList({ page: 1, page_size: INIT_PAGING.page_size });
+	}, []);
 
-	const getDataList = async ( params ) =>
-	{
+	const getDataList = async (params) => {
 
-		dispatch( toggleShowLoading( true ) );
-		const rs = await RoomService.getDataList( params, true, setSearchParams );
-		if ( rs?.status === 200 )
-		{
-
-			setData( rs?.data?.rooms || [] );
-			setPaging( rs?.meta || INIT_PAGING );
-		} else
-		{
-			setData( [] );
-			setPaging( INIT_PAGING );
+		dispatch(toggleShowLoading(true));
+		const rs = await RoomService.getDataList(params, true, setSearchParams);
+		console.log( '--------- response: ', rs)
+		if (rs) {
+			setData(rs?.data?.rooms || []);
+			setPaging(rs?.meta || INIT_PAGING);
+		} else {
+			setData([]);
+			setPaging(INIT_PAGING);
 		}
-		dispatch( toggleShowLoading( false ) );
+		dispatch(toggleShowLoading(false));
 	};
 
-	const getDataCategories = async ( params ) =>
-	{
+	const getDataCategories = async (params) => {
 
-		const rs = await OtherService.getCategories( params );
-		if ( rs?.status === 200 )
-		{
-
-			setCategories( rs?.data?.categories || [] );
-		} else
-		{
-			setCategories( [] );
+		const rs = await OtherService.getCategories(params);
+		if (rs?.status === 200) {
+			setCategories(rs?.data?.categories || []);
+		} else {
+			setCategories([]);
 		}
 	};
 
@@ -66,19 +57,19 @@ const RoomPage = () =>
 		<React.Fragment>
 
 			<RoomList
-				data={ data }
-				getDataList={ getDataList }
-				paging={ paging }
-				params={ params }
-				setParams={ setParams }
-				setPaging={ setParams }
+				data={data}
+				getDataList={getDataList}
+				paging={paging}
+				params={params}
+				setParams={setParams}
+				setPaging={setParams}
 				categories={categories}
 				setCategories={setCategories}
 			/>
 
-		
+
 		</React.Fragment>
-		
+
 	);
 };
 

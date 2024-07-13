@@ -7,7 +7,7 @@ import { RoomService } from "../../services/feService/roomService";
 import { useDispatch } from "react-redux";
 import { toggleShowLoading } from "../../redux/actions/common";
 import { URL_IMG, URL_IMG_V2, buildImage, buildImageV2, customNumber, onErrorImg } from "../../common/helper";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useParams,Link } from "react-router";
 import { StarIcons } from "../../components/common/star";
 import { CarouselImg } from "../../components/common/carosel";
 
@@ -89,6 +89,12 @@ const RoomDetailPage = () => {
 		<React.Fragment>
 			<section className="ftco-section">
 				<Container>
+					<div className="d-flex justify-content-between pt-4">
+						<h2>Chi tiết phòng: {detailData?.name}</h2>
+						<div>
+							<a className={'btn btn-sm btn-primary'} href={'/room'} >Trở về</a>
+						</div>
+					</div>
 					<Row>
 						<Col md={8} className="py-3">
 							{
@@ -97,7 +103,7 @@ const RoomDetailPage = () => {
 										<Row className="mb-5">
 											<div className="w-md-50 w-100 col-md-6">
 												<img
-													src={images && buildImageV2(images) || DEFAULT_IMG}
+													src={images || DEFAULT_IMG}
 													className="room-img mb-0 w-100 h-75 " onError={onErrorImg} />
 												{
 													albums?.length > 0 &&

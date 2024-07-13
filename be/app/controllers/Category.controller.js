@@ -4,7 +4,6 @@ const Category = require( "../models/Category.model")
 exports.index = async ( req, res ) =>
 {
 	// destructure page and limit and set default values
-
 	try
 	{
 		const condition = {};

@@ -11,7 +11,6 @@ export const NotFoundPage = () =>
 			<img src={ NOTFOUND_IMG } className="w-50 h-50" />
 			<p className="mt-3">
 				<Link to='#' className="mt-2 fs-20">Không tìm thấy dữ liệu</Link>
-
 			</p>
 		</div>
 	);

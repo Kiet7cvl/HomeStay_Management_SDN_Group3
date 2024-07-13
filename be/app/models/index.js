@@ -11,6 +11,7 @@ const Room = require('./Room.model');
 const Vote = require('./Vote.model');
 const Category = require('./Category.model');
 const Princing = require('./Princing.model');
+const Service = require('./Service.model');
 
 const db = {};
 
@@ -24,6 +25,7 @@ db.room = Room;
 db.vote = Vote;
 db.category = Category;
 db.princing = Princing;
+db.service = Service;
 
 db.ROLES = ["ADMIN", "OWNER", "USER"];
 

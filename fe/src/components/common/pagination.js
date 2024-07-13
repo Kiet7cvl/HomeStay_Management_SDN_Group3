@@ -10,43 +10,39 @@ export const Pagination = (
 		page = 1,
 		onPageChange,
 	}
-) =>
-{
+) => {
 
-	const [ paginationMemo, setPaginationMemo ] = useState( [] );
+	const [paginationMemo, setPaginationMemo] = useState([]);
 
-	useEffect( () =>
-	{
-		if ( page )
-		{
+	useEffect(() => {
+		if (page) {
 			let data = paginationFunc(total, pageSize, siblingCount, page) || [];
 			console.log(data);
-			setPaginationMemo( data);
+			setPaginationMemo(data);
 		}
-	}, [ page, total ] );
+	}, [page, total]);
 
-	const paginationFunc = ( total, pageSize, siblingCount, page ) => {
-		const totalPageCount = Math.ceil( total / pageSize );
+	const paginationFunc = (total, pageSize, siblingCount, page) => {
+		const totalPageCount = Math.ceil(total / pageSize);
 
 		// Pages count is determined as siblingCount + firstPage + lastPage + currentPage + 2*DOTS
 		const totalPageNumbers = siblingCount + 5;
 
-		let max = siblingCount 
+		let max = siblingCount
 
 		/*
 		  Case 1:
 		  If the number of pages is less than the page numbers we want to show in our
 		  paginationComponent, we return the range [1..totalPageCount]
 		*/
-		if ( totalPageNumbers >= totalPageCount )
-		{
-			return range( 1, totalPageCount );
+		if (totalPageNumbers >= totalPageCount) {
+			return range(1, totalPageCount);
 		}
 
 		/*
 			Calculate left and right sibling index and make sure they are within range 1 and totalPageCount
 		*/
-		const leftSiblingIndex = Math.max( page - siblingCount, 1 );
+		const leftSiblingIndex = Math.max(page - siblingCount, 1);
 		const rightSiblingIndex = Math.min(
 			page + siblingCount,
 			totalPageCount
@@ -64,19 +60,17 @@ export const Pagination = (
 		/*
 			Case 2: No left dots to show, but rights dots to be shown
 		*/
-		if ( !shouldShowLeftDots && shouldShowRightDots )
-		{
+		if (!shouldShowLeftDots && shouldShowRightDots) {
 			let leftItemCount = 3 + 2 * siblingCount;
-			let leftRange = range( 1, leftItemCount );
+			let leftRange = range(1, leftItemCount);
 			console.log('left range-----------> ', leftRange);
-			return [ ...leftRange ];
+			return [...leftRange];
 		}
 
 		/*
 			Case 3: No right dots to show, but left dots to be shown
 		*/
-		if ( shouldShowLeftDots && !shouldShowRightDots )
-		{
+		if (shouldShowLeftDots && !shouldShowRightDots) {
 
 			let rightItemCount = 3 + 2 * siblingCount;
 			let rightRange = range(
@@ -84,70 +78,64 @@ export const Pagination = (
 				totalPageCount
 			);
 			console.log('rightRange range 2-----------> ', rightRange);
-			return [ ...rightRange ];
+			return [...rightRange];
 		}
 
 		/*
 			Case 4: Both left and right dots to be shown
 		*/
-		if ( shouldShowLeftDots && shouldShowRightDots )
-		{
-			let middleRange = range( leftSiblingIndex, rightSiblingIndex );
+		if (shouldShowLeftDots && shouldShowRightDots) {
+			let middleRange = range(leftSiblingIndex, rightSiblingIndex);
 			console.log('middleRange range 3-----------> ', middleRange);
-			return [ ...middleRange ];
+			return [...middleRange];
 		}
 
 		return [];
 	};
 
-	const onNext = () =>
-	{
-		onPageChange( page + 1 );
+	const onNext = () => {
+		onPageChange(page + 1);
 	};
 
-	const onPrevious = () =>
-	{
-		onPageChange( page - 1 );
+	const onPrevious = () => {
+		onPageChange(page - 1);
 	};
 
-	const lastPage = paginationMemo.length > 0 && paginationMemo[ paginationMemo.length - 1 ] || 0;
+	const lastPage = paginationMemo.length > 0 && paginationMemo[paginationMemo.length - 1] || 0;
 
 	return (
 		<div className="row mt-5">
 			{
 				paginationMemo.length > 0 && total > 0 &&
 				<div className="col text-center">
-					<div className="block-27">
-						<ul>
+					<div className="">
+						<ul className='list-unstyled d-flex flex-row justify-content-center list-group'>
 							{
 								page > 1 &&
-								<li
-									onClick={ ( e ) => { onPrevious() } }
+								<li 
+									onClick={(e) => { onPrevious() }}
 								>
 									<span >&lt;</span>
 								</li>
 							}
-							{ paginationMemo.length > 1 && paginationMemo.map( pageNumber =>
-							{
+							{paginationMemo.length > 1 && paginationMemo.map(pageNumber => {
 								return (
 									<li key={pageNumber}
-										className={ `mx-2 ${ pageNumber === page ? ' active disabled ' : '' }` }
-										onClick={ () =>
-										{
-											if ( page !== pageNumber )
-											{
-												onPageChange( pageNumber )
+										className={`mx-2 list-group-item${pageNumber === page ? ' active disabled ' : ''}`}
+										onClick={() => {
+											if (page !== pageNumber) {
+												onPageChange(pageNumber)
 											}
-										} }
+										}}
 									>
-										<span >{ pageNumber }</span>
+										<span >{pageNumber}</span>
 									</li>
 								);
-							} ) }
+							})}
 							{
 								page < lastPage &&
 								<li
-									onClick={ ( e ) => { onNext() } }
+									onClick={(e) => { onNext() }}
 								><span >&gt;</span></li>
 
 							}

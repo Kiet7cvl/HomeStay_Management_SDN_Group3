@@ -13,15 +13,9 @@ const roomSchema = new Schema(
     avatar: {
       type: String,
     },
-    room_code: {
-      type: String,
-    },
     status: {
       type: String,
       default: "EMPTY",
-    },
-    floor: {
-      type: Number,
     },
     price: {
       type: Number,
@@ -30,6 +24,9 @@ const roomSchema = new Schema(
       type: Number,
     },
     bed: {
+      type: Number,
+    },
+    bathroom: {
       type: Number,
     },
     total_vote: {
@@ -49,6 +46,12 @@ const roomSchema = new Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Category",
     },
+    services: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Service",
+      }
+    ],
     ablum: {
       type: Array,
     },

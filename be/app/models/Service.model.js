@@ -1,8 +1,9 @@
+
 const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
-const categorySchema = new Schema(
+const ServiceSchema = new Schema(
   {
     name: {
       type: String,
@@ -10,7 +11,7 @@ const categorySchema = new Schema(
     },
     created_at: { type: Date, default: Date.now },
   },
-  { collection: "categories " }
+  { collection: "services " }
 );
 
-module.exports = mongoose.model("Category", categorySchema);
+module.exports = mongoose.model("Service", ServiceSchema);

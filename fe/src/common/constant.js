@@ -37,7 +37,7 @@ export const Gender = [
 
 export const INIT_PAGING = {
 	current_page: 1,
-	page_size: 8,
+	page_size: 6,
 	total_page: 1,
 	total: 0
 };
