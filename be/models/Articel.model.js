@@ -1,12 +1,11 @@
 const mongoose = require("mongoose");
-
 const { Schema } = mongoose;
 
 const articleSchema = new Schema(
   {
-    name: {
+    title: {
       type: String,
-      required: "name cannot be blank",
+      required: [true, "Title cannot be blank"],
     },
     avatar: {
       type: String,
@@ -17,10 +16,9 @@ const articleSchema = new Schema(
     article_content: {
       type: String,
     },
-    create_at: { type: Date, default: Date.now },
+    created_at: { type: Date, default: Date.now },
   },
   { collection: "articles" }
 );
 
-module.exports =
-  mongoose.models.Article || mongoose.model("Article", articleSchema);
+module.exports = mongoose.models.Article || mongoose.model("Article", articleSchema);

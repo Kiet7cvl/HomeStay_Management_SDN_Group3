@@ -1,38 +1,35 @@
 const mongoose = require("mongoose");
-
 const { Schema } = mongoose;
 
 const userSchema = new Schema(
   {
     name: {
       type: String,
-      required: "name cannot be blank",
+      required: [true, "name cannot be blank"],
     },
     email: {
       type: String,
+      required: [true, "User email required"],
       validate: {
         validator: function (checkEmail) {
           return /.+\@.+\..+/.test(checkEmail);
         },
-        message: (props) => `${props.value} is not a valid email`, // Thông báo lỗi khi định dạng email không hợp lệ
+        message: (props) => `${props.value} is not a valid email`,
       },
-      required: [true, "User email required"],
     },
     phone: {
       type: String,
+      required: [true, "User phone number required"],
       validate: {
         validator: function (phoneNumber) {
-          return /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/.test(
-            phoneNumber
-          );
+          return /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/.test(phoneNumber);
         },
         message: (props) => `${props.value} is not a valid phone number`,
       },
-      required: [true, "User phone number required"],
     },
     password: {
       type: String,
-      required: "password cannot be blank",
+      required: [true, "password cannot be blank"],
     },
     avatar: {
       type: String,
@@ -44,7 +41,6 @@ const userSchema = new Schema(
     birthday: {
       type: Date,
     },
-
     status: { type: Number, default: 1 },
     type: {
       type: String,
@@ -59,7 +55,7 @@ const userSchema = new Schema(
     ],
     purchase_count: {
       type: Number,
-      default: 0
+      default: 0,
     },
     experience_points: {
       type: Number,
@@ -67,10 +63,10 @@ const userSchema = new Schema(
     },
     level: {
       type: Number,
-      default: 0
+      default: 0,
     },
   },
-  { collection: "user" }
+  { collection: "users" }
 );
 
 module.exports = mongoose.models.User || mongoose.model("User", userSchema);

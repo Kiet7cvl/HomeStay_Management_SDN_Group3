@@ -1,80 +1,90 @@
-require('dotenv').config();
-const crypto = require('crypto');
-const https = require('https');
+// const crypto = require('crypto');
+// const https = require('https');
 
-const createMoMoPayment = async (req, res) => {
-    const { amount, orderInfo, paymentCode } = req.body;
+// exports.createMoMoPayment = async (req, res) => {
+//     try {
+//         // Parameters for MoMo payment
+//         const accessKey = 'F8BBA842ECF85';
+//         const partnerCode = 'MOMO';
+//         const redirectUrl = 'https://webhook.site/b3088a6a-2d17-4f8d-a383-71389a6c600b';
+//         const ipnUrl = 'https://webhook.site/b3088a6a-2d17-4f8d-a383-71389a6c600b';
+//         const requestType = "captureWallet";
+//         const amount = '50000';
+//         const orderId = partnerCode + new Date().getTime();
+//         const requestId = orderId;
+//         const extraData = '';
+//         const orderInfo = 'pay with MoMo';
+//         const autoCapture = true;
+//         const lang = 'vi';
+//         const orderGroupId = '';
 
-    const accessKey = process.env.MOMO_ACCESS_KEY;
-    const secretKey = process.env.MOMO_SECRET_KEY;
-    const partnerCode = process.env.MOMO_PARTNER_CODE;
-    const redirectUrl = process.env.MOMO_REDIRECT_URL;
-    const ipnUrl = process.env.MOMO_IPN_URL;
-    const requestType = "captureWallet";
-    const orderId = partnerCode + new Date().getTime();
-    const requestId = orderId;
-    const extraData = '';
-    const autoCapture = true;
-    const lang = 'vi';
+//         // Construct raw signature
+//         const rawSignature = `accessKey=${accessKey}&amount=${amount}&extraData=${extraData}&ipnUrl=${ipnUrl}&orderId=${orderId}&orderInfo=${orderInfo}&partnerCode=${partnerCode}&redirectUrl=${redirectUrl}&requestId=${requestId}&requestType=${requestType}`;
 
-    const rawSignature = `accessKey=${accessKey}&amount=${amount}&extraData=${extraData}&ipnUrl=${ipnUrl}&orderId=${orderId}&orderInfo=${orderInfo}&partnerCode=${partnerCode}&redirectUrl=${redirectUrl}&requestId=${requestId}&requestType=${requestType}`;
-    const signature = crypto.createHmac('sha256', secretKey).update(rawSignature).digest('hex');
+//         // Generate signature using HMAC SHA256
+//         const signature = crypto.createHmac('sha256', secretKey)
+//                                 .update(rawSignature)
+//                                 .digest('hex');
 
-    const requestBody = JSON.stringify({
-        partnerCode,
-        partnerName: 'Test',
-        storeId: 'MomoTestStore',
-        requestId,
-        amount,
-        orderId,
-        orderInfo,
-        redirectUrl,
-        ipnUrl,
-        lang,
-        requestType,
-        autoCapture,
-        extraData,
-        orderGroupId: '',
-        signature,
-    });
+//         // Prepare JSON request body
+//         const requestBody = JSON.stringify({
+//             partnerCode: partnerCode,
+//             partnerName: "Test",
+//             storeId: "MomoTestStore",
+//             requestId: requestId,
+//             amount: amount,
+//             orderId: orderId,
+//             orderInfo: orderInfo,
+//             redirectUrl: redirectUrl,
+//             ipnUrl: ipnUrl,
+//             lang: lang,
+//             requestType: requestType,
+//             autoCapture: autoCapture,
+//             extraData: extraData,
+//             orderGroupId: orderGroupId,
+//             signature: signature
+//         });
 
-    const options = {
-        hostname: 'test-payment.momo.vn',
-        port: 443,
-        path: '/v2/gateway/api/create',
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Content-Length': Buffer.byteLength(requestBody),
-        },
-    };
+//         // Create HTTPS request options
+//         const options = {
+//             hostname: 'test-payment.momo.vn',
+//             port: 443,
+//             path: '/v2/gateway/api/create',
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//                 'Content-Length': Buffer.byteLength(requestBody)
+//             }
+//         };
 
-    const momoReq = https.request(options, (momoRes) => {
-        let data = '';
+//         // Send the HTTPS request to MoMo endpoint
+//         const reqMoMo = https.request(options, (response) => {
+//             let data = '';
 
-        momoRes.on('data', (chunk) => {
-            data += chunk;
-        });
+//             // A chunk of data has been received.
+//             response.on('data', (chunk) => {
+//                 data += chunk;
+//             });
 
-        momoRes.on('end', () => {
-            const response = JSON.parse(data);
-            if (response.resultCode === 0) {
-                res.status(200).json({ data: response, status: 200 });
-            } else {
-                res.status(400).json({ error: response, status: 400 });
-            }
-        });
-    });
+//             // The whole response has been received.
+//             response.on('end', () => {
+//                 console.log('MoMo API Response:', JSON.parse(data));
+//                 res.status(200).json(JSON.parse(data));
+//             });
+//         });
 
-    momoReq.on('error', (e) => {
-        console.error(`Problem with request: ${e.message}`);
-        res.status(500).json({ error: 'Internal Server Error', status: 500 });
-    });
+//         // Handle HTTPS request error.
+//         reqMoMo.on('error', (error) => {
+//             console.error('Error calling MoMo API:', error);
+//             res.status(500).json({ error: 'Failed to call MoMo API', message: error.message });
+//         });
 
-    momoReq.write(requestBody);
-    momoReq.end();
-};
+//         // Write JSON data to request body.
+//         reqMoMo.write(requestBody);
+//         reqMoMo.end();
 
-module.exports = {
-    createMoMoPayment,
-};
+//     } catch (error) {
+//         console.error('Error creating MoMo payment:', error);
+//         res.status(500).json({ error: 'Failed to create MoMo payment', message: error.message });
+//     }
+// };

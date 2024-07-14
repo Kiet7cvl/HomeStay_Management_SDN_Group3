@@ -1,18 +1,13 @@
 const mongoose = require("mongoose");
-
 const { Schema } = mongoose;
-mongoose.Promise = global.Promise;
 
 const roomSchema = new Schema(
   {
     name: {
       type: String,
-      required: "name cannot be blank",
+      required: [true, "name cannot be blank"],
     },
     avatar: {
-      type: String,
-    },
-    room_code: {
       type: String,
     },
     status: {
@@ -23,9 +18,6 @@ const roomSchema = new Schema(
       type: Number,
     },
     price: {
-      type: Number,
-    },
-    size: {
       type: Number,
     },
     bed: {
@@ -43,17 +35,17 @@ const roomSchema = new Schema(
     room_content: {
       type: String,
     },
-    category_id: { type: String, required: "category_id cannot be blank" },
     category: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Category",
+      required: [true, "category_id cannot be blank"]
     },
-    ablum: {
+    album: {
       type: Array,
     },
-    create_at: { type: Date, default: Date.now },
+    created_at: { type: Date, default: Date.now },
   },
-  { collection: "room" }
+  { collection: "rooms" }
 );
 
 module.exports = mongoose.models.Room || mongoose.model("Room", roomSchema);

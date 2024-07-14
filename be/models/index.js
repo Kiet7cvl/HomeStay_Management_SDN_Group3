@@ -8,7 +8,7 @@ const Contact = require('./Contact.model');
 const Room = require('./Room.model');
 const Vote = require('./Vote.model');
 const Category = require("./Category.model");
-const Pricing = require('./Princing.model');
+const Pricing = require('./Pricing.model');
 
 const db = {};
 
