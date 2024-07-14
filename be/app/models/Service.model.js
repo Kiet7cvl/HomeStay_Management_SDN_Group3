@@ -1,16 +1,16 @@
 
 const mongoose = require("mongoose");
-
 const { Schema } = mongoose;
 
 const ServiceSchema = new Schema(
   {
     name: {
       type: String,
-      required: "name cannot be blank",
+      required: [true, "name cannot be blank"],
     },
     created_at: { type: Date, default: Date.now },
   },
+
   { collection: "services " }
 );
 

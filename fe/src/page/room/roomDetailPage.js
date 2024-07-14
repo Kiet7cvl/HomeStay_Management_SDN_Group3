@@ -156,7 +156,9 @@ const RoomDetailPage = () => {
 															navigate('/booking/create/' + detailData._id);
 														}
 													}}>
-														Book
+														<form action="/create-payment-link">
+															<button>Booking</button>
+														</form>
 													</button>
 												</div>
 
