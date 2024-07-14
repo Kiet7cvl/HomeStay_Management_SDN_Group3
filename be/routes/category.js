@@ -5,8 +5,8 @@ const controllerBuilder = require('../app/controllers/Category.controller');
 const authMiddleware = require('../app/middleware/AuthJwt');
 const isAuth = authMiddleware.isAuth;
 
-router.get('/category/', isAuth, controllerBuilder.index);
-router.get('/category/:id',isAuth,controllerBuilder.show);
+router.get('/category/', controllerBuilder.index);
+router.get('/category/:id',controllerBuilder.show);
 router.post('/category/store',isAuth,controllerBuilder.store);
 router.put('/category/update/:id',isAuth,controllerBuilder.update);
 router.delete('/category/:id',isAuth,controllerBuilder.delete);

@@ -17,6 +17,10 @@ const roomSchema = new Schema(
       type: String,
       default: "EMPTY",
     },
+    address: {
+      type: String,
+      required: "address cannot be blank",
+    },
     price: {
       type: Number,
     },

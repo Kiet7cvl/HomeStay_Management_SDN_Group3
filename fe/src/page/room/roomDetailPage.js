@@ -7,7 +7,7 @@ import { RoomService } from "../../services/feService/roomService";
 import { useDispatch } from "react-redux";
 import { toggleShowLoading } from "../../redux/actions/common";
 import { URL_IMG, URL_IMG_V2, buildImage, buildImageV2, customNumber, onErrorImg } from "../../common/helper";
-import { useNavigate, useParams,Link } from "react-router";
+import { useNavigate, useParams, Link } from "react-router";
 import { StarIcons } from "../../components/common/star";
 import { CarouselImg } from "../../components/common/carosel";
 
@@ -20,8 +20,6 @@ const RoomDetailPage = () => {
 
 	const [albums, setAlbums] = useState([]);
 	const [images, setImages] = useState();
-
-
 
 	const dispatch = useDispatch();
 	const params = useParams();
@@ -149,6 +147,8 @@ const RoomDetailPage = () => {
 														const accessToken = localStorage.getItem('access_token');
 
 														if (!accessToken) {
+															const currentPath = window.location.pathname; // Use window.location.pathname in v6
+															localStorage.setItem('previousUrl', currentPath);
 															// Nếu không có token, chuyển hướng người dùng tới trang đăng nhập
 															navigate('/sign-in');
 														} else {

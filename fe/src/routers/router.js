@@ -20,44 +20,6 @@ import RoomDetail from "../page-owner/roomDetail";
 // import  {PaymentPage}  from "../page/others/paymentPage.js";
 
 export const Routers = [
-	//profile Section(User Profile)
-
-	{ path: "/room", title: 'Room', component: <RoomPage /> },
-	{
-		path: "/room/:id",
-		parents: [
-			{
-				title: 'Room',
-				path: '/room'
-			}
-		],
-		title: 'Chi tiết phòng',
-		component: <RoomDetailPage />
-	},
-	// menu
-	{
-		path: "/menu/:id",
-		title: 'Menu',
-		component: <BlogsPage />
-	},
-
-	{
-		path: "/menu",
-		title: 'Bài viết',
-		component: <BlogsPage />
-	},
-
-	{
-		path: "/menu/show/:id/",
-		title: 'Chi tiết',
-		parents: [
-			{
-				title: 'Menu',
-				path: '/menu'
-			}
-		],
-		component: <BlogDetail />
-	},
 		//booking
 	{
 		path: "/booking/create",
@@ -91,11 +53,7 @@ export const Routers = [
 
 	// 	// other
 	
-	{
-		path: "/home",
-		title: 'HomePage',
-		component: <Home />
-	},
+	
 	{
 		path: "/account",
 		title: 'Thông tin tài khoản',
@@ -141,6 +99,49 @@ export const Routers = [
 
 ];
 
+export const PublicRoutes = [
+	{ path: "/", component: <Home /> },
+	{
+		path: "/home",
+		title: 'HomePage',
+		component: <Home />
+	},
+	{ path: "/room", title: 'Room', component: <RoomPage /> },
+	{
+		path: "/room/:id",
+		parents: [
+			{
+				title: 'Room',
+				path: '/room'
+			}
+		],
+		title: 'Chi tiết phòng',
+		component: <RoomDetailPage />
+	},
+	{
+		path: "/menu/:id",
+		title: 'Menu',
+		component: <BlogsPage />
+	},
+
+	{
+		path: "/menu",
+		title: 'Bài viết',
+		component: <BlogsPage />
+	},
+
+	{
+		path: "/menu/show/:id/",
+		title: 'Chi tiết',
+		parents: [
+			{
+				title: 'Menu',
+				path: '/menu'
+			}
+		],
+		component: <BlogDetail />
+	},
+]
 
 export const AuthRoutes = [
 	{ path: "/sign-up", component: <SignUpPage /> },

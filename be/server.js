@@ -6,7 +6,7 @@ var cors = require('cors')
 const httpErrors = require('http-errors');
 const bodyParser = require('body-parser');
 const db = require('./app/models');
-const { UserRouter , AuthRouter, RoomRouter, Payment, CategoryRouter} = require('./routes/index')
+const { UserRouter , AuthRouter, RoomRouter, Payment, CategoryRouter, ServiceRouter} = require('./routes/index')
 
 //Khoi tao express web server
 const app = express();
@@ -31,6 +31,7 @@ app.get('/', (req, res) => {
 app.use('/', AuthRouter);
 app.use('/room', RoomRouter)
 app.use('/', CategoryRouter)
+app.use('/', ServiceRouter)
 
 app.use(async (req, res, next) => {
     next(httpErrors.NotFound());

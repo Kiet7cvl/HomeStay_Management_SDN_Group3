@@ -2,130 +2,138 @@ import React, { useEffect, useRef, useState } from "react";
 import { Col, Container, Row, Form, Button } from "react-bootstrap";
 import { InputBase } from "../base-form/controlInputForm";
 import { categoryService } from "../../services/feService/categoryService";
+import { ServiceService } from "../../services/feService/serviceService";
 import { useParams } from "react-router-dom";
 import { SelectBase } from "../base-form/selectForm";
 
-export const FormRoomSearch = ( props ) =>
-{
-
-	const [ form, setForm ] = useState( {
-		size: null,
-		bed: null,
+export const FormRoomSearch = (props) => {
+	const [form, setForm] = useState({
 		vote_number: null,
-		name: null,
+		bed: null,
+		bathroom: null,
 		price: null,
-		floors: null,
-		category_id: null
-	} );
+		service: null,
+		category_id: null,
+		address: null
+	});
 
-	const [ category_id, setCategoryId ] = useState( null );
-	const [ categories, setCategories ] = useState( [] );
+	const [category_id, setCategoryId] = useState(null);
+	const [categories, setCategories] = useState([]);
+	const [services, setServices] = useState([]);
 	const params = useParams();
-	const handleSubmit = async ( e ) =>
-	{
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		props.setParams( form );
-		props.getDataList( { page: 1, page_size: props.paging.page_size, ...form } );
-
+		props.setParams(form);
+		props.getDataList({ page: 1, page_size: props.paging.page_size, ...form });
 	}
 
-	const resetForm = () =>
-	{
-		setForm( {
-			size: null,
+	const resetForm = () => {
+		setForm({
 			bed: null,
-			vote_number: null,
+			bathroom: null,
 			price: null,
-			name: null,
-			floors: null,
-			category_id: null
-		} )
-		props.setParams( {
-			size: null,
+			service: null,
+			category_id: null,
+			address: null
+		})
+		props.setParams({
 			bed: null,
-			vote_number: null,
-			name: null,
-			floors: null,
+			bathroom: null,
 			price: null,
-			category_id: null
-		} );
-		props.getDataList( { page: 1, page_size: props.paging.page_size } );
+			service: null,
+			category_id: null,
+			address: null
+		});
+		props.getDataList({ page: 1, page_size: props.paging.page_size });
 	}
 
 
-	const getListsMenu = async () =>
-	{
-		const response = await categoryService.getDataList( {
+	const getListsMenu = async () => {
+		const response = await categoryService.getDataList({
 			page_size: 1000
-		} )
-		if ( response?.status === 'success' || response?.status === 200 )
-		{
-			setCategories( response.data.categories );
+		})
+		if (response?.status === 'success' || response?.status === 200) {
+			setCategories(response.data.categories);
+		}
+	}
+	const getListsService = async () => {
+		const response = await ServiceService.getDataList({
+			page_size: 1000
+		})
+		if (response?.status === 'success' || response?.status === 200) {
+			setServices(response.data.services);
 		}
 	}
 
-	useEffect( () =>
-	{
-		getListsMenu().then( r => { } );
-	}, [] );
+	useEffect(() => {
+		getListsMenu().then(r => { });
+		getListsService().then(r => { });
+	}, []);
 
 	return (
-		<Form noValidate onSubmit={ handleSubmit }>
+		<Form noValidate onSubmit={handleSubmit}>
 			<Row className="">
 				<Form.Group className="mb-3 col-md-12">
-					<SelectBase form={ form } setForm={ setForm } name={ 'category_id' }
-						label={ 'Loại phòng: ' } data={ categories }
-						key_name={ 'category_id' } required={ false } placeholder={ 'Loại phòng' }
-						type={ 'text' } />
-				</Form.Group>
-				<Form.Group className="mb-3 col-md-12">
-					<InputBase form={ form } setForm={ setForm } name={ 'name' }
-						label={ 'Tên phòng: ' }
-						key_name={ 'name' } required={ false } placeholder={ 'Nhập tên phòng' }
-						type={ 'text' }
+					<InputBase form={form} setForm={setForm} name={'address'}
+						label={'Điểm đến: '}
+						key_name={'address'} required={false} placeholder={'Nhập điểm đến'}
+						type={'text'}
 					/>
 				</Form.Group>
 
 				<Form.Group className="mb-3 col-md-12">
-					<InputBase form={ form } setForm={ setForm } name={ 'price' }
-						label={ 'Giá phòng: ' }
-						key_name={ 'price' } required={ false } placeholder={ 'Nhập giá phòng' }
-						type={ 'text' }
+					<SelectBase form={form} setForm={setForm} name={'category_id'}
+						label={'Loại phòng: '} data={categories}
+						key_name={'category_id'} required={false} placeholder={'Loại phòng'}
+						type={'text'} />
+				</Form.Group>
+				<Form.Group className="mb-3 col-md-12">
+					<SelectBase form={form} setForm={setForm} name={'price'}
+						label={'Khoảng giá: '} data={categories}
+						key_name={'price'} required={false} placeholder={'Khoảng giá'}
+						type={'text'}
 					/>
 				</Form.Group>
 
 				<Form.Group className="mb-3 col-md-12">
-					<InputBase form={ form } setForm={ setForm } name={ 'size' }
-						label={ 'Kích thước: ' }
-						key_name={ 'size' } required={ false } placeholder={ 'Nhập kích thước' }
-						type={ 'text' }
+					<InputBase form={form} setForm={setForm} name={'bed'}
+						label={'Giường: '}
+						key_name={'bed'} required={false} placeholder={'nhập số giường'}
+						type={'text'}
 					/>
 				</Form.Group>
 
 				<Form.Group className="mb-3 col-md-12">
-					<InputBase form={ form } setForm={ setForm } name={ 'bed' }
-						label={ 'Phòng ngủ: ' }
-						key_name={ 'bed' } required={ false } placeholder={ 'Nhập số phòng ngủ' }
-						type={ 'text' }
+					<InputBase form={form} setForm={setForm} name={'bathroom'}
+						label={'Phòng tắm: '}
+						key_name={'bathroom'} required={false} placeholder={'Nhập số nhà tắm'}
+						type={'text'}
 					/>
 				</Form.Group>
 
-				<Form.Group className="mb-3 col-md-12">
-					<InputBase form={ form } setForm={ setForm } name={ 'floors' }
-						label={ 'Tầng: ' }
-						key_name={ 'floors' } required={ false } placeholder={ 'Nhập số tầng' }
-						type={ 'number' }
-					/>
-				</Form.Group>
-
-
+				<p>Tiện nghi: </p>
+				<div key={`inline-checkbox`} className="mb-3 row">
+					{services?.map((item, index) => (
+						<div key={index} className="col-md-6"> {/* Use index for unique key */}
+							<Form.Check
+								form={form}
+								setForm={setForm}
+								inline
+								label={item.name} // Assuming your service item has a "name" property
+								name="service" // Assuming you want each checkbox to have the same name
+								type="checkbox"
+								id={`inline-checkbox-${index}`} // Generate unique IDs
+							/>
+						</div>
+					))}
+				</div>
 
 			</Row>
 
 			<Form.Group className="mb-3 d-flex justify-content-center">
 				<button type="submit" className='btn btn-primary px-3 fs-14 py-2'>Tìm kiếm</button>
 				<button type="button"
-					onClick={ ( e ) => { resetForm() } }
+					onClick={(e) => { resetForm() }}
 					className='ml-2 px-3 fs-14 py-2 btn btn-secondary'>Reset</button>
 			</Form.Group>
 		</Form>

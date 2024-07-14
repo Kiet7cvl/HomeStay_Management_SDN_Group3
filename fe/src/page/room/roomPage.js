@@ -14,11 +14,12 @@ const RoomPage = () => {
 	const [categories, setCategories] = useState([]);
 	const [paging, setPaging] = useState(INIT_PAGING);
 	const [params, setParams] = useState({
-		size: null,
 		bed: null,
 		vote_number: null,
-		name: null,
 		price: null,
+		bathroom: null,
+		address: null,
+		service: null,
 		category_id: null
 	});
 	console.log(data);

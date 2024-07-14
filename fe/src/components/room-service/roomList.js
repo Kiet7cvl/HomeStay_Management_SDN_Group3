@@ -21,7 +21,6 @@ export const RoomList = (props) => {
 							</Col>
 						</Row>
 					}
-
 					<Row>
 						{
 							!props.isShowLink && !props.notShowTitle && <Col md={3}>
@@ -47,7 +46,7 @@ export const RoomList = (props) => {
 												<div className="room">
 													<Link to={'/room/' + item._id} className="img d-flex justify-content-center align-items-center br-top-left-6 br-top-right-6"
 													>
-														<img src={item.avatar || DEFAULT_IMG} className="rounded"  style={{width: "100%", height: "200px", objectFit: "cover"}} />
+														<img src={item.avatar || DEFAULT_IMG} className="rounded" style={{ width: "100%", height: "200px", objectFit: "cover" }} />
 
 													</Link>
 													<div className="text p-3 text-center br-bottom-left-6 br-bottom-right-6">

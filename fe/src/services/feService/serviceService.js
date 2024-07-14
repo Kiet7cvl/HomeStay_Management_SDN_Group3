@@ -1,7 +1,7 @@
 import { buildFilter } from "../../common/helper";
 import { deleteMethod, getMethod, postMethod, putMethod } from "../baseService";
 
-export const ServiceHotelService = {
+export const ServiceService = {
 	async getDataList ( filters, isSet, setSearchParams )
 	{
 		const params = buildFilter( filters );

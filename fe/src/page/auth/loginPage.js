@@ -45,7 +45,8 @@ export const SignInPage = () => {
 				localStorage.setItem( 'user', JSON.stringify( user ) );
 				toast( 'Đăng nhập thành công!', {type: 'success', autoClose: 900} );
 				await timeDelay( 1000 )
-				window.location.href = '/'
+				let previousUrl = localStorage.getItem('previousUrl')
+				window.location.href =  previousUrl || '/'
 			} else
 			{
 				toast( response?.message || 'Đăng nhập thất bại', {type: 'error'} )
