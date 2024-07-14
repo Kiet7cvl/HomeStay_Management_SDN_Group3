@@ -5,6 +5,8 @@ const morgan = require('morgan');
 var cors = require('cors')
 const httpErrors = require('http-errors');
 const bodyParser = require('body-parser');
+const PayOS = require("@payos/node");
+
 const db = require('./app/models');
 const { UserRouter , AuthRouter, RoomRouter, Payment, CategoryRouter} = require('./routes/index')
 
@@ -51,7 +53,7 @@ app.get('/', (req, res) => {
 
 //Tiep nhan cac request tu client
 
-// app.use('/api/payments', Payment);
+app.use('/api/payments', Payment);
 app.use('/', AuthRouter);
 app.use('/room', RoomRouter)
 app.use('/', CategoryRouter)
