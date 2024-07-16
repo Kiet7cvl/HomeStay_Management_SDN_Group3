@@ -1,16 +1,16 @@
 const { buildParamPaging, buildResponsePaging } = require("../../helper/BuildData.helper");
-const Article = require("../../models/Article.model");
+const Article = require("../models/Article.model");
 
 exports.index = async (req, res) => {
     const { page = 1, page_size = 10, menu_id } = req.query;
     const condition = menu_id ? { menu_id } : {};
     try {
-        const articles = await Article.find(condition)
+        const articles = await Article.find({})
             .limit(page_size)
             .skip((page - 1) * page_size)
             .exec();
 
-        const count = await Article.countDocuments(condition);
+        const count = await Article.countDocuments({});
         const meta = buildResponsePaging(page, page_size, count);
 
         res.status(200).json({ data: { articles }, meta, status: 200 });

@@ -56,31 +56,6 @@ const RoomLissPage = () => {
 							<Link className={'btn btn-sm btn-primary'} to={'/owner/room-create'} >Thêm mới</Link>
 							</div>
 						</div>
-
-						{/* <div className="row">
-							<div className="card col-4">
-								<img src="..." class="card-img-top" alt="..." />
-								<div class="card-body">
-									<p class="card-text">Mô tả qua về phòng, vị trí, ...</p>
-								</div>
-							</div>
-
-							<div className="card col-4" >
-								<img src="..." class="card-img-top" alt="..." />
-								<div class="card-body">
-									<p class="card-text">Mô tả qua về phòng, vị trí, ...</p>
-								</div>
-							</div>
-
-							<div className="card col-4">
-								<img src="..." class="card-img-top" alt="..." />
-								<div class="card-body">
-									<p class="card-text">Mô tả qua về phòng, vị trí, ...</p>
-								</div>
-							</div>
-
-						</div> */}
-
 						<div class="pt-4 row">
 							<div class="  border border-0 col-md-4">
 								<img src="https://cdn.pixabay.com/photo/2024/06/07/04/44/interior-8813800_640.jpg" class="card-img-top rounded" alt="..." style={{width: "100%", height: "300px", objectFit: "cover"}}/>

@@ -7,10 +7,8 @@ const RoomRouter = require('./room');
 const CategoryRouter = require('./category');
 const ServiceRouter = require('./service');
 const VoteRouter = require('./vote');
+const ArticleRouter = require('./Article.routes');
 
-// const express = require('express')
-// const router = express.Router();
-// router.use('/payments', require('./payment.route'));
 
 
 module.exports = {
@@ -21,7 +19,8 @@ module.exports = {
     RoomRouter,
     CategoryRouter,ServiceRouter,
     UserRouter,
-    VoteRouter
+    VoteRouter,
+    ArticleRouter
 }
 
 
