@@ -12,6 +12,7 @@ const Vote = require('./Vote.model');
 const Category = require('./Category.model');
 const Princing = require('./Princing.model');
 const Service = require('./Service.model');
+const Image = require('./Image.model');
 
 const db = {};
 
@@ -26,6 +27,7 @@ db.vote = Vote;
 db.category = Category;
 db.princing = Princing;
 db.service = Service;
+db.image = Image;
 
 db.ROLES = ["ADMIN", "OWNER", "USER"];
 
@@ -33,8 +35,8 @@ db.connectDB = async () => {
     mongoose.connect(process.env.MONGO_URI, {
         dbName: process.env.DB_NAME
     })
-    .then(() => console.log("Connect to MonggoDB success"))
-    .catch(error => console.log(error.message));
+        .then(() => console.log("Connect to MonggoDB success"))
+        .catch(error => console.log(error.message));
 };
 
 module.exports = db;
