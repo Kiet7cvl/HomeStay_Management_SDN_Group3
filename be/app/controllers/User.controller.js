@@ -1,8 +1,13 @@
 const User = require("../models/User.model") // new
+require("dotenv").config();
+const jwt = require( 'jsonwebtoken' );
+const promisify = require( 'util' ).promisify;
+const sign = promisify( jwt.sign ).bind( jwt );
+const verify = promisify( jwt.verify ).bind( jwt );
 
 exports.index = async (req, res) => {
     // destructure page and limit and set default values
-    const page = req.query.page || 1; const page_size = req.query.page_size  || 10;
+    const page = req.query.page || 1; const page_size = req.query.page_size || 10;
 
     try {
         const condition = {};
@@ -24,7 +29,7 @@ exports.index = async (req, res) => {
             current_page: parseInt(page),
             page_size: parseInt(page_size)
         }
-        const status =  200;
+        const status = 200;
         const data = {
             users: users
         }
@@ -41,7 +46,7 @@ exports.index = async (req, res) => {
 exports.show = async (req, res) => {
     try {
         const user = await User.findOne({ _id: req.params.id })
-        return res.status(200).json({ data: user, status : 200 });
+        return res.status(200).json({ data: user, status: 200 });
     } catch {
         res.status(404)
         res.send({ error: "Article doesn't exist!" })
@@ -59,7 +64,7 @@ exports.store = async (req, res) => {
 
     })
     await user.save();
-    return res.status(200).json({ data: user, status : 200 });
+    return res.status(200).json({ data: user, status: 200 });
 };
 
 exports.update = async (req, res) => {
@@ -90,6 +95,40 @@ exports.update = async (req, res) => {
     }
 };
 
+exports.becomeOnwer = async (req, res) => {
+    try {
+        const user = await User.findOne({ _id: req.params.id }).populate("roles");
+        user.roles.push('668ead6e14c426340ad69882')
+        await user.save();
+        console.log(user);
+        const accessTokenLife = process.env.ACCESS_TOKEN_LIFE;
+        const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET;
+
+        const dataForAccessToken = {
+            email: user.email,
+            roles: "OWNER"
+        };
+        const accessToken = await this.generateToken(
+            dataForAccessToken,
+            accessTokenSecret,
+            accessTokenLife,
+        );
+        if (!accessToken) {
+            return res
+                .status(401)
+                .send({ message: 'Đăng nhập không thành công, vui lòng thử lại.' });
+        }
+        const response = {
+            accessToken: accessToken,
+            user: user
+        }
+        return res.status(200).json({ data: response, status: 200 });
+    } catch {
+        res.status(404)
+        res.send({ error: "User doesn't exist!" })
+    }
+};
+
 exports.delete = async (req, res) => {
     try {
         await User.deleteOne({ _id: req.params.id })
@@ -97,5 +136,23 @@ exports.delete = async (req, res) => {
     } catch {
         res.status(404)
         res.send({ error: "User doesn't exist!" })
+    }
+};
+
+exports.generateToken = async (payload, secretSignature, tokenLife) => {
+    try {
+        return await sign(
+            {
+                payload,
+            },
+            secretSignature,
+            {
+                algorithm: 'HS256',
+                expiresIn: tokenLife,
+            },
+        );
+    } catch (error) {
+        console.log(`Error in generate access token:  + ${error}`);
+        return null;
     }
 };

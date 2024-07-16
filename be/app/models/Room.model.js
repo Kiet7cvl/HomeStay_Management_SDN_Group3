@@ -42,10 +42,7 @@ const roomSchema = new Schema(
     description: {
       type: String,
     },
-    room_content: {
-      type: String,
-    },
-    category_id: { type: String, required: "category_id cannot be blank" },
+    // category_id: { type: String, required: "category_id cannot be blank" },
     category: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Category",

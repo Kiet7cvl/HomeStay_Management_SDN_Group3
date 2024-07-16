@@ -14,13 +14,13 @@ const RoomPage = () => {
 	const [categories, setCategories] = useState([]);
 	const [paging, setPaging] = useState(INIT_PAGING);
 	const [params, setParams] = useState({
-		bed: null,
 		vote_number: null,
-		price: null,
+		bed: null,
 		bathroom: null,
-		address: null,
+		price: null,
 		service: null,
-		category_id: null
+		address: null,
+		category_id: null,
 	});
 	console.log(data);
 	const dispatch = useDispatch();
@@ -33,7 +33,7 @@ const RoomPage = () => {
 
 		dispatch(toggleShowLoading(true));
 		const rs = await RoomService.getDataList(params, true, setSearchParams);
-		console.log( '--------- response: ', rs)
+		console.log('--------- response: ', rs)
 		if (rs) {
 			setData(rs?.data?.rooms || []);
 			setPaging(rs?.meta || INIT_PAGING);

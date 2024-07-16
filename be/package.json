@@ -8,7 +8,6 @@
     "start": "nodemon start"
   },
   "dependencies": {
-    "@payos/node": "^1.0.8",
     "axios": "^1.7.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",

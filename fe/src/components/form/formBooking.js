@@ -169,7 +169,7 @@ export const FormBooking = () => {
 				<Container>
 					<Row className="row justify-content-center mb-5 pb-3">
 						<Col md={7} className="heading-section text-center">
-							<h2 className="mb-4">Mẫu đặt phòng</h2>
+							<h2 className="mb-4">Thông tin đặt phòng</h2>
 						</Col>
 					</Row>
 

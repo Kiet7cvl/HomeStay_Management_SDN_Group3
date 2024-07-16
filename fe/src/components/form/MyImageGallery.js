@@ -21,12 +21,12 @@ const MyImageGallery =() => {
     ];
     return(
         <ImageGallery items={images}
-        thumbnailPosition={'left'}
+        thumbnailPosition={'bottom'}
         originalHeight={'200px'}
         renderItem={(item) => {
             return (
                 <div className="image-container">
-                    <img className="rounded img-fluid" src={item.original} alt="" />
+                    <img className="rounded img-fluid" src={item.original} alt=""  style={{height: "450px", width:"100%"}}/>
                     <div className="caption">{item.description}</div>
                 </div>
             );

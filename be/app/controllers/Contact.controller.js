@@ -7,7 +7,6 @@ const createContact = async (req, res) => {
       email: req.body.email,
       subject: req.body.subject,
       message: req.body.message,
-      
     });
     await contact.save().then((contact) => {
       res.status(201).json({ data: contact, status: 201 });
@@ -17,7 +16,6 @@ const createContact = async (req, res) => {
     res.status(500).send({ error: "Internal Server Error" });
   }
 };
-
 const getContacts = async (req, res) => {
   try {
     var contacts = await Contact.find();

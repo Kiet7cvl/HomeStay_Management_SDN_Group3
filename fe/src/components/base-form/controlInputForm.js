@@ -5,7 +5,6 @@ import { setField } from "../../common/helper";
 
 export const InputBase = (props) => {
 
-
 	return (
 		<React.Fragment>
 			{

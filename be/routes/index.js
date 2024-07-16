@@ -6,6 +6,7 @@ const AuthRouter = require('./auth');
 const RoomRouter = require('./room');
 const CategoryRouter = require('./category');
 const ServiceRouter = require('./service');
+const VoteRouter = require('./vote');
 
 // const express = require('express')
 // const router = express.Router();
@@ -18,7 +19,9 @@ module.exports = {
     Payment,
     AuthRouter,
     RoomRouter,
-    CategoryRouter,ServiceRouter
+    CategoryRouter,ServiceRouter,
+    UserRouter,
+    VoteRouter
 }
 
 

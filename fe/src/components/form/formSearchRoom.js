@@ -13,8 +13,8 @@ export const FormRoomSearch = (props) => {
 		bathroom: null,
 		price: null,
 		service: null,
+		address: null,
 		category_id: null,
-		address: null
 	});
 
 	const [category_id, setCategoryId] = useState(null);
@@ -29,20 +29,22 @@ export const FormRoomSearch = (props) => {
 
 	const resetForm = () => {
 		setForm({
+			vote_number: null,
 			bed: null,
 			bathroom: null,
 			price: null,
 			service: null,
+			address: null,
 			category_id: null,
-			address: null
 		})
 		props.setParams({
+			vote_number: null,
 			bed: null,
 			bathroom: null,
 			price: null,
 			service: null,
+			address: null,
 			category_id: null,
-			address: null
 		});
 		props.getDataList({ page: 1, page_size: props.paging.page_size });
 	}
@@ -82,7 +84,7 @@ export const FormRoomSearch = (props) => {
 				</Form.Group>
 
 				<Form.Group className="mb-3 col-md-12">
-					<SelectBase form={form} setForm={setForm} name={'category_id'}
+					<SelectBase form={form} setForm={setForm} name={'category'}
 						label={'Loại phòng: '} data={categories}
 						key_name={'category_id'} required={false} placeholder={'Loại phòng'}
 						type={'text'} />
@@ -119,10 +121,10 @@ export const FormRoomSearch = (props) => {
 								form={form}
 								setForm={setForm}
 								inline
-								label={item.name} // Assuming your service item has a "name" property
-								name="service" // Assuming you want each checkbox to have the same name
+								label={item.name}
+								name="service"
 								type="checkbox"
-								id={`inline-checkbox-${index}`} // Generate unique IDs
+								id={`inline-checkbox-${index}`}
 							/>
 						</div>
 					))}

@@ -13,7 +13,7 @@ export const StarIcons = ( props ) =>
 					{
 						return (
 							<StarFill key={ index }
-								className={ `star active
+								className={ `star active text-warning
 							${ index > 0 ? 'ml-2' : '' }` }
 
 							/>
