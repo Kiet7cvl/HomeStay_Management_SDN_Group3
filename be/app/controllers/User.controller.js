@@ -1,5 +1,6 @@
 const User = require("../models/User.model") // new
 require("dotenv").config();
+
 const jwt = require( 'jsonwebtoken' );
 const promisify = require( 'util' ).promisify;
 const sign = promisify( jwt.sign ).bind( jwt );
@@ -7,6 +8,8 @@ const verify = promisify( jwt.verify ).bind( jwt );
 const bufferToDataURI = require("../utils/file");
 const { uploadToCloudinary } = require("../services/upload");
 const ErrorHandler = require("../utils/errorHandler");
+const mailService = require("../../services/SendMail.service");
+
 
 exports.index = async (req, res) => {
     // destructure page and limit and set default values
@@ -134,6 +137,10 @@ exports.becomeOnwer = async (req, res) => {
             accessToken: accessToken,
             user: user
         }
+        const formResponse = mailService.becomeOwnerSuccess(
+            user.name
+        );
+        mailService.sendMail(user?.email, formResponse);
         return res.status(200).json({ data: response, status: 200 });
     } catch {
         res.status(404)

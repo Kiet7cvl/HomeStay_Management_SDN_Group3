@@ -26,12 +26,13 @@ const BlogsPage = () =>
 	const dispatch = useDispatch();
 	useEffect( () =>
 	{	
-		getDataList( { page: 1, page_size: INIT_PAGING.page_size, menu_id: paramQuery.id } );
+		getDataList( { page: 1, page_size: INIT_PAGING.page_size } );
 		if(paramQuery.id) {
-			getDetail(paramQuery.id);
 			setParams({...params, menu_id: paramQuery.id})
 		}
-	}, [paramQuery.id] );
+	}, [
+		paramQuery.id
+	] );
 
 	const getDataList = async ( params ) =>
 	{
@@ -50,12 +51,6 @@ const BlogsPage = () =>
 		dispatch( toggleShowLoading( false ) );
 	};
 
-	const getDetail = async (id) => {
-		const response = await menuService.getDetailData(id);
-		if(response?.status === 200) {
-			setTitle(response?.data?.name || 'Menu');
-		}
-	}
 	return (
 		<React.Fragment>
 

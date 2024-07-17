@@ -10,7 +10,7 @@ const isAuth = authMiddleware.isAuth;
 router.route('/auth/register').post(authBuilder.register);
 router.route('/auth/login').post(authBuilder.login);
 
-router.get('/profile',isAuth, authBuilder.getProfile);
+router.get('/profile/:id', authBuilder.getProfile);
 router.put('/profile',isAuth, authBuilder.updateInfo);
 router.put('/change-password',isAuth, authBuilder.changePassword);
 

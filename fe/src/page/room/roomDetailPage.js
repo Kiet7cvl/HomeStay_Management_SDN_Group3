@@ -31,7 +31,7 @@ const RoomDetailPage = () => {
 	const navigate = useNavigate()
 	useEffect(() => {
 		getRooms();
-		// getFeedback()
+		getFeedback()
 	}, []);
 
 	useEffect(() => {
@@ -141,7 +141,7 @@ const RoomDetailPage = () => {
 										))}
 									</div>
 									<div className="py-2">
-										<span className="fs-2 fw-bold py-2">1.000.000</span><span> VNĐ / đêm </span>
+										<span className="fs-2 fw-bold py-2">{customNumber(detailData?.price, '.', ' vnđ')}</span><span> / đêm </span>
 									</div>
 								</div>
 								<div>

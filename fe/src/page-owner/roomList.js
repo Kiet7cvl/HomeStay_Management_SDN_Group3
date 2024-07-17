@@ -1,50 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-
+import { RoomService } from "../services/feService/roomService";
+import { toggleShowLoading } from "../redux/actions/common";
+import { useSearchParams } from "react-router-dom";
+import { INIT_PAGING } from "../common/constant";
+import { useDispatch } from "react-redux";
+import { NotFoundPage } from "../components/common/notFound";
 
 const RoomLissPage = () => {
 	document.title = 'Phòng cho thuê của bạn';
 
-	// const [data, setData] = useState([]);
-	// const [title, setTitle] = useState('Pricing');
-	// const [paging, setPaging] = useState(INIT_PAGING);
-	// const [params, setParams] = useState({
-	// 	menu_id: null
-	// });
+	const [data, setData] = useState([]);
+	const [paging, setPaging] = useState(INIT_PAGING);
 
-	// let [searchParams, setSearchParams] = useSearchParams({});
+	const dispatch = useDispatch();
+	useEffect(() => {
+		getDataList({ page: 1, page_size: INIT_PAGING.page_size });
+	}, []);
 
-	// const paramQuery = useParams();
+	const getDataList = async () => {
+		dispatch(toggleShowLoading(true));
+		let id = JSON.parse(localStorage.getItem('user'))._id;
+		const rs = await RoomService.getRoombyOwner(id);
+		if (rs?.status === 200) {
+			setData(rs?.data || []);
+			setPaging(rs?.meta || INIT_PAGING);
 
-	// const dispatch = useDispatch();
-	// useEffect(() => {
-	// 	getDataList({ page: 1, page_size: INIT_PAGING.page_size, menu_id: paramQuery.id });
-	// 	if (paramQuery.id) {
-	// 		getDetail(paramQuery.id);
-	// 		setParams({ ...params, menu_id: paramQuery.id })
-	// 	}
-	// }, [paramQuery.id]);
-
-	// const getDataList = async (params) => {
-	// 	dispatch(toggleShowLoading(true));
-	// 	const rs = await ArticleService.getDataList(params, true, setSearchParams);
-	// 	if (rs?.status === 200) {
-
-	// 		setData(rs?.data?.articles || []);
-	// 		setPaging(rs?.meta || INIT_PAGING);
-	// 	} else {
-	// 		setData([]);
-	// 		setPaging(INIT_PAGING);
-	// 	}
-	// 	dispatch(toggleShowLoading(false));
-	// };
-
-	// const getDetail = async (id) => {
-	// 	const response = await menuService.getDetailData(id);
-	// 	if (response?.status === 200) {
-	// 		setTitle(response?.data?.name || 'Menu');
-	// 	}
-	// }
+		} else {
+			setData([]);
+			setPaging(INIT_PAGING);
+		}
+		dispatch(toggleShowLoading(false));
+	};
+	console.log(data);
 	return (
 		<React.Fragment>
 			<main class="content">
@@ -53,34 +41,26 @@ const RoomLissPage = () => {
 						<div className="d-flex justify-content-between">
 							<h2>Nhà/phòng cho thuê của bạn</h2>
 							<div>
-							<Link className={'btn btn-sm btn-primary'} to={'/owner/room-create'} >Thêm mới</Link>
+								<Link className={'btn btn-sm btn-primary'} to={'/owner/room-create'} >Thêm mới</Link>
 							</div>
 						</div>
 						<div class="pt-4 row">
-							<div class="  border border-0 col-md-4">
-								<img src="https://cdn.pixabay.com/photo/2024/06/07/04/44/interior-8813800_640.jpg" class="card-img-top rounded" alt="..." style={{width: "100%", height: "300px", objectFit: "cover"}}/>
-								<div class="card-body">
-									<p class="card-text pt-2 pb-5">This is a wider card with a natural lead-in to additional content. This content is a little bit longer.</p>
-								</div>
-							</div>
-							<div class=" border border-0 col-md-4">
-								<img src="https://img.pikbest.com/wp/202347/high-quality-background-photograph-of-a-gaming-room-featuring-3d-rendered-computers-and-chairs_9769943.jpg!w700wp" class="card-img-top rounded " alt="..." style={{width: "100%", height: "300px", objectFit: "cover"}}/>
-								<div class="card-body">
-									<p class="card-text pt-2 pb-5">This card has supporting text below as a natural lead-in to additional content.</p>
-								</div>
-							</div>
-							<div class="  border border-0 col-md-4">
-								<img src="https://images.squarespace-cdn.com/content/v1/5aadf482aa49a1d810879b88/1625384955010-ICW3WG4U9V1FKFZCFK6B/Img9949.jpg" class="card-img-top rounded " alt="..." style={{width: "100%", height: "300px", objectFit: "cover"}}/>
-								<div class="card-body">
-									<p class="card-text pt-2 pb-5">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-								</div>
-							</div>
-							<div class="  border border-0 col-md-4">
-								<img src="https://cdn.pixabay.com/photo/2024/06/07/04/44/interior-8813800_640.jpg" class="card-img-top rounded" alt="..." style={{width: "100%", height: "300px", objectFit: "cover"}}/>
-								<div class="card-body">
-									<p class="card-text pt-2 pb-5">This is a wider card with a natural lead-in to additional content. This content is a little bit longer.</p>
-								</div>
-							</div>
+							{data?.length > 0 ? data?.map(item => {
+								return (
+									<div class="border border-0 col-md-4">
+										<Link to={'/owner/room-detail/' + item._id} className="img d-flex justify-content-center align-items-center br-top-left-6 br-top-right-6"
+										>
+											<img src={item?.avatar || ''} class="card-img-top rounded" alt="..." style={{ width: "100%", height: "300px", objectFit: "cover" }} />
+										</Link>
+										<div class="card-body">
+											<p class="card-text pt-2 pb-5 text-truncate">{item?.description}</p>
+										</div>
+									</div>
+								)
+							}) : <NotFoundPage />
+							}
+
+
 						</div>
 					</div>
 					<hr />

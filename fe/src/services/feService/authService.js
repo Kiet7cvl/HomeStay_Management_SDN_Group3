@@ -1,5 +1,5 @@
 import { buildFilter } from "../../common/helper";
-import { deleteMethod, getMethod, postMethod, putMethod } from "../baseService";
+import { deleteMethod, getMethod, postMethod, putMethod,getById } from "../baseService";
 
 export const AuthService = {
 	async register ( data )
@@ -12,9 +12,9 @@ export const AuthService = {
 		return await postMethod( 'auth/login', data );
 	},
 	
-	async getProfile ()
+	async getProfile (id)
 	{
-		return await getMethod( 'profile' );
+		return await getById( 'profile/' + id);
 	},
 	async updateProfile ( data )
 	{
