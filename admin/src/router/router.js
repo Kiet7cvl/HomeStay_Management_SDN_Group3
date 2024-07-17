@@ -1,9 +1,5 @@
 import React from "react";
 import PageHome from "../pages/home/PageHome";
-import PageArticle from "../pages/article/PageArticle";
-import CreateArticle from "../pages/article/CreateArticle";
-import UpdateArticle from "../pages/article/UpdateArticle";
-import PageRoom from "../pages/room/PageRoom";
 import PageUser from "../pages/user/PageUser";
 import { LoginPage } from "../pages/auth/Login";
 import AccountUser from "../pages/account/AccountUser";
@@ -22,27 +18,6 @@ export const routes = () => {
 		{
 		    path: "/account",
 		    element: <AccountUser />,
-		},
-		{
-			path: "/article/",
-			children: [
-				{
-					path: "",
-					element: <PageArticle />,
-				},
-				{
-					path: "create",
-					element: <CreateArticle />,
-				},
-				{
-					path: "update/:id",
-					element: <UpdateArticle />,
-				},
-				{
-					path: "*",
-					element: <PageArticle />,
-				},
-			]
 		},
 		{
 			path: "/user/",
@@ -67,19 +42,6 @@ export const routes = () => {
 				{
 					path: "*",
 					element: <PageOwner />,
-				}
-			]
-		},
-		{
-			path: "/room/",
-			children: [
-				{
-					path: "",
-					element: <PageRoom />,
-				},
-				{
-					path: "*",
-					element: <PageRoom />,
 				}
 			]
 		},

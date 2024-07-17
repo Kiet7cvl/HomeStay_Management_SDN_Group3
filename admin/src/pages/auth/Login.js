@@ -3,7 +3,7 @@ import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { setField, timeDelay } from '../../services/common';
-// import { AuthService } from '../../services/authService';
+import { AuthService } from '../../services/authService';
 import {img_bg} from '../../assets/images/bg_2.jpg'
 import "../../index.css";
 
@@ -24,29 +24,29 @@ export const LoginPage = () =>
 	const handleSubmit = async ( e ) =>
 	{
 		e.preventDefault();
-		// if ( e?.currentTarget?.checkValidity() === false )
-		// {
-		// 	e.stopPropagation();
-		// } else
-		// {
-		// 	const response = await AuthService.login( form );
-		// 	if ( response?.status === 200 && response?.data )
-		// 	{
-		// 		localStorage.setItem( 'access_token', response.data.accessToken );
-		// 		let user = {
-		// 			name: response.data.user?.name,
-		// 			email: response.data.user?.email,
-		// 			avatar: response.data.user?.avatar,
-		// 		};
-		// 		localStorage.setItem( 'user', JSON.stringify( user ) );
-		// 		toast( 'Đăng nhập thành công!' );
-		// 		await timeDelay( 1000 )
-		// 		window.location.href = `/`;
-		// 	} else
-		// 	{
-		// 		toast( response?.message || 'Đăng nhập thất bại' )
-		// 	}
-		// }
+		if ( e?.currentTarget?.checkValidity() === false )
+		{
+			e.stopPropagation();
+		} else
+		{
+			const response = await AuthService.login( form );
+			if ( response?.status === 200 && response?.data )
+			{
+				localStorage.setItem( 'access_token', response.data.accessToken );
+				let user = {
+					name: response.data.user?.name,
+					email: response.data.user?.email,
+					avatar: response.data.user?.avatar,
+				};
+				localStorage.setItem( 'user', JSON.stringify( user ) );
+				toast( 'Đăng nhập thành công!' );
+				await timeDelay( 1000 )
+				window.location.href = `/`;
+			} else
+			{
+				toast( response?.message || 'Đăng nhập thất bại' )
+			}
+		}
 
 		setValidated(true);
 

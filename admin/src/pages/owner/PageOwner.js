@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Breadcrumb, Button, Col, Container, Row } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
-// import userApi from "../../services/userService";
+import userService from "../../services/userService";
 import { Link } from "react-router-dom";
 import moment from "moment/moment";
 import { Pagination } from '../../common/form/pagination';
@@ -14,56 +14,21 @@ export default function PageOwner() {
         total: 0,
         current_page: 1
     });
+    const [params, setParams] = useState({});
 
+    const [owners, setOwner] = useState([]);
 
-    const owners = [
-        {
-            _id: 1,
-            name: "Hoang Tuan Kiet",
-            email: "kiet7cvl@gmail.com",
-            phone: '0377245644',
-            sex: "Nam",
-            birthday: "2024-03-21",
-            type: "OWNER",
-            crecreated_at: "2024-03-21"
-        }, {
-            _id: 1,
-            name: "Hoang Tuan Kiet",
-            email: "kiet7cvl@gmail.com",
-            phone: '0377245644',
-            sex: "Nam",
-            birthday: "2024-03-21",
-            type: "OWNER",
-            crecreated_at: "2024-03-21"
-        }, {
-            _id: 1,
-            name: "Hoang Tuan Kiet",
-            email: "kiet7cvl@gmail.com",
-            phone: '0377245644',
-            sex: "Nam",
-            birthday: "2024-03-21",
-            type: "OWNER",
-            crecreated_at: "2024-03-21"
-        }, {
-            _id: 1,
-            name: "Hoang Tuan Kiet",
-            email: "kiet7cvl@gmail.com",
-            phone: '0377245644',
-            sex: "Nam",
-            birthday: "2024-03-21",
-            type: "OWNER",
-            crecreated_at: "2024-03-21"
-        }, {
-            _id: 1,
-            name: "Hoang Tuan Kiet",
-            email: "kiet7cvl@gmail.com",
-            phone: '0377245644',
-            sex: "Nam",
-            birthday: "2024-03-21",
-            type: "OWNER",
-            crecreated_at: "2024-03-21"
+    useEffect(() => {
+        getUsers({ ...params }).then(r => { });
+    }, []);
+
+    const getUsers = async (filters) => {
+        const response = await userService.getLists(filters)
+        console.log(response);
+        if (response?.status === 'success' || response?.status === 200) {
+            setOwner(response?.data?.users)
         }
-    ]
+    }
 
     return (
         <div>
@@ -86,26 +51,26 @@ export default function PageOwner() {
                                     <th>Phone</th>
                                     <th>Sex</th>
                                     <th>Birthday</th>
-                                    <th>Type</th>
+                                    <th>Role</th>
                                     <th>Created</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {owners.length > 0 ? owners.map((item, key) => {
+                                {owners.length > 0 ? owners.filter(i=>i.roles[0] == '668ead6e14c426340ad69882').map((item, key) => {
                                     return (
                                         <tr key={key}>
                                             <td>{key + 1}</td>
                                             {/* <Link to={`/room/${item._id}`}>{item.name}</Link> */}
                                             <td>
-                                            <Link to={`/room`} className='text-decoration-none'>{item.name}</Link>
+                                                <Link to={`/room`} className='text-decoration-none'>{item.name}</Link>
 
                                             </td>
                                             <td>{item.email}</td>
                                             <td>{item.phone}</td>
                                             <td>{(item.sex === 'nu' || item.sex === 'Nữ') ? 'Nữ' : "Nam"}</td>
                                             <td>{moment(item.birthday).format("MM-DD-YYYY")}</td>
-                                            <td>{item.type}</td>
+                                            <td>OWNER</td>
                                             <td>{moment(item.created_at).format("MM-DD-YYYY")}</td>
                                             <td>
                                                 <Button variant="success" size="sm">

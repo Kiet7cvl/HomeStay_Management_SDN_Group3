@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Breadcrumb, Button, Col, Container, Row } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
-// import userApi from "../../services/userService";
 import { Link } from "react-router-dom";
 import moment from "moment/moment";
 import { Pagination } from '../../common/form/pagination';
-import { FormRoomSearch } from '../../common/form/formSearchRoom';
+import  voteService  from "../../services/voteService";
 
 
 
@@ -17,47 +16,21 @@ export default function Feedback() {
         total: 0,
         current_page: 1
     });
+	const [feedback, setFeedbacks] = useState([]);
 
+    useEffect(() => {
+		getFeedback()
+	}, []);
 
-    const feedbacks = [
-        {
-            _id: 1,
-            name: "Hoang Tuan Kiet",
-            room: "Phòng Vip 101",
-            description: 'Phòng đẹp, rộng rãi như mô tả, dịch vụ chất lượng',
-            vote: "4/5",
-            crecreated_at: "2024-03-21"
-        }, {
-            _id: 1,
-            name: "Hoang Tuan Kiet",
-            room: "Phòng Vip 101",
-            description: 'Phòng đẹp, rộng rãi như mô tả, dịch vụ chất lượng',
-            vote: "4/5",
-            crecreated_at: "2024-03-21"
-        }, {
-            _id: 1,
-            name: "Hoang Tuan Kiet",
-            room: "Phòng Vip 101",
-            description: 'Phòng đẹp, rộng rãi như mô tả, dịch vụ chất lượng',
-            vote: "4/5",
-            crecreated_at: "2024-03-21"
-        }, {
-            _id: 1,
-            name: "Hoang Tuan Kiet",
-            room: "Phòng Vip 101",
-            description: 'Phòng đẹp, rộng rãi như mô tả, dịch vụ chất lượng',
-            vote: "4/5",
-            crecreated_at: "2024-03-21"
-        }, {
-            _id: 1,
-            name: "Hoang Tuan Kiet",
-            room: "Phòng Vip 101",
-            description: 'Phòng đẹp, rộng rãi như mô tả, dịch vụ chất lượng',
-            vote: "4/5",
-            crecreated_at: "2024-03-21"
+    const getFeedback = async () => {
+        const rs = await voteService.getLists({ page: 1, page_size: 7, status: 1 });
+        if (rs?.status === 200) {
+            setFeedbacks(rs?.data?.votes || [])
+        } else {
+            setFeedbacks([]);
         }
-    ]
-
+    };
+   console.log(feedback);
     return (
         <div>
             <Container>
@@ -69,19 +42,7 @@ export default function Feedback() {
                             </Breadcrumb.Item>
                             <Breadcrumb.Item active>Danh sách</Breadcrumb.Item>
                         </Breadcrumb>
-                        <h1 className="text-center ">Danh sách phản hồi</h1>
-                        <div className='mb-4'>
-                            <FormRoomSearch
-                            lable='Phản hồi theo Phòng'
-							placeholder='Chọn phòng'
-                            // getDataList={ getRooms }
-                            // paging={ paging }
-                            // setPaging={ setPaging }
-                            // params={ params }
-                            // setParams={ setParams }
-                            />
-
-                        </div>
+                        <h1 className="text-center pb-4">Danh sách phản hồi</h1>
                         <Table responsive striped bordered hover>
                             <thead>
                                 <tr>
@@ -95,19 +56,17 @@ export default function Feedback() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {feedbacks.length > 0 ? feedbacks.map((item, key) => {
+                                {feedback?.length > 0 ? feedback.map((item, key) => {
                                     return (
                                         <tr key={key}>
                                             <td>{key + 1}</td>
-                                            {/* <Link to={`/room/${item._id}`}>{item.name}</Link> */}
-                                            <td>
-                                                {/* <Link to={`/room`} className='text-decoration-none'></Link> */}
-                                                {item.name}
+                                            <td>                             
+                                                {item?.user?.name}
                                             </td>
-                                            <td>{item.room}</td>
-                                            <td>{item.description}</td>
-                                            <td>{item.vote}</td>
-                                            <td>{moment(item.created_at).format("MM-DD-YYYY")}</td>
+                                            <td>{item?.room?.name}</td>
+                                            <td>{item.vote_content}</td>
+                                            <td>{item.vote_number}</td>
+                                            <td>{moment(item.create_at).format("MM-DD-YYYY")}</td>
                                             <td>
                                                 <Button variant="success" size="sm">
                                                     Enable

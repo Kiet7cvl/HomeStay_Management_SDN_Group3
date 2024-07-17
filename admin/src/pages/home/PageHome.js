@@ -7,6 +7,7 @@ import { Table } from 'react-bootstrap';
 export default function PageHome() {
 
 	return (
+		
 		<div>
 			<div class="container-fluid  px-4">
 			<h1 className="text-center ">Biểu đồ thống kê</h1>
@@ -74,3 +75,5 @@ export default function PageHome() {
 		</div >
 	);
 }
+
+

@@ -25,31 +25,31 @@ export default function Report() {
             name: "Hoang Tuan Kiet",
             title: "Báo lỗi",
             description: 'Hệ thống còn đang chậm, trải nghiệm chưa tốt cho lắm',
-            crecreated_at: "2024-03-21"
+            created_at: "2024-03-21"
         }, {
             _id: 1,
-            name: "Hoang Tuan Kiet",
+            name: "Vũ Hồng Quân",
             title: "Báo lỗi ",
             description: 'Hệ thống còn đang chậm, trải nghiệm chưa tốt cho lắm',
-            crecreated_at: "2024-03-21"
+            created_at: "2024-03-24"
         }, {
             _id: 1,
-            name: "Hoang Tuan Kiet",
+            name: "Trần Phi Hùng",
             title: "Báo lỗi ",
-            description: 'Phòng đẹp, rộng rãi như mô tả, dịch vụ chất lượng',
-            crecreated_at: "2024-03-21"
+            description: 'Thỉnh thoảng còn giật lag',
+            created_at: "2024-03-24"
         }, {
             _id: 1,
-            name: "Hoang Tuan Kiet",
+            name: "Phan Văn thịnh",
             title: "Báo lỗi ",
-            description: 'Phòng đẹp, rộng rãi như mô tả, dịch vụ chất lượng',
-            crecreated_at: "2024-03-21"
+            description: 'Hệ thống chưa thực sự tối ưu, UI chưa thuận mắt',
+            created_at: "2024-03-27"
         }, {
             _id: 1,
-            name: "Hoang Tuan Kiet",
+            name: "Nguyễn Văn An",
             title: "Báo lỗi ",
-            description: 'Phòng đẹp, rộng rãi như mô tả, dịch vụ chất lượng',
-            crecreated_at: "2024-03-21"
+            description: 'Chuyển tiếp giữa các trang còn giật',
+            created_at: "2024-03-30"
         }
     ]
 
