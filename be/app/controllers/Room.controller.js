@@ -1,15 +1,20 @@
 const Room = require('../models/Room.model'); // Adjust the path as needed
 const { buildResponsePaging, buildParamPaging } = require("../../helper/BuildData.helper");
+const bufferToDataURI = require('../utils/file');
+const { uploadToCloudinary } = require('../services/upload');
+const ErrorHandler = require('../utils/errorHandler');
 // Create a new room
 exports.createRoom = async (req, res) => {
+  const { file } = req;
   try {
+    
     const room = new Room({
       name: req.body.name,
-      avatar: req.body.avatar,
       room_code: req.body.room_code,
       status: req.body.status,
       floor: req.body.floor,
       price: req.body.price,
+      address: req.body.address,
       size: req.body.size,
       bed: req.body.bed,
       total_vote: req.body.total_vote,
@@ -18,8 +23,15 @@ exports.createRoom = async (req, res) => {
       room_content: req.body.room_content,
       category_id: req.body.category_id,
       category: req.body.category,
-      ablum: Array.isArray(req.body.ablum) ? album : [album]
+      // ablum: Array.isArray(req.body.ablum) ? album : [album]
     });
+    if (file) {
+      if (!file) throw new ErrorHandler(400, "Image is required");
+      const fileFormat = file.mimetype.split("/")[1];
+      const { base64 } = await bufferToDataURI(fileFormat, file.buffer);
+      const imageDetails = await uploadToCloudinary(base64, fileFormat);
+      room.avatar = imageDetails.url;
+    }
     await room.save().then((room) => {
       res.status(201).json({ data: room, status: 201 });
     });
