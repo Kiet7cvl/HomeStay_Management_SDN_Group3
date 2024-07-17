@@ -1,12 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import { BlogList } from "../../components/blog/blogList";
-// import { useDispatch } from "react-redux";
-// import { toggleShowLoading } from "../../redux/actions/common";
-// import { ArticleService } from "../../services/feService/articleService";
-// import { useParams } from "react-router";
-// import { menuService } from "../../services/feService/menuService";
-// import { useSearchParams } from "react-router-dom";
-// import { INIT_PAGING } from "../../common/constant";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
@@ -14,39 +6,45 @@ import { UserService } from "../services/feService/userService";
 
 import { toast } from "react-toastify"
 
-
 const PricingPage = () => {
 
 	document.title = 'Pricing';
 
 	const [show, setShow] = useState(false);
+	const [option, setOption] = useState('10');
 
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
-
+	useEffect(() => {
+		setShow();
+	}, []);
 
 	const onSuccessPaypal = async (details, data) => {
 		console.log('PayPal payment successful:', details, data);
-		// const id = JSON.parse(localStorage.getItem('user'))._id
-		// const response = await UserService.putBecomeOwnerData(id, "668ead6e14c426340ad69882");
-		// if (response?.status === 200 && response?.data) {
-		// 	localStorage.setItem('access_token', response.data.accessToken);
-		// 	let user = {
-		// 		name: response.data.user?.name,
-		// 		email: response.data.user?.email,
-		// 		avatar: response.data.user?.avatar,
-		// 		_id: response.data.user?._id,
-		// 		phone: response.data.user?.phone || null,
-		// 		type: response.data.user?.type,
-		// 		roles: "OWNER",
-		// 	};
-		// 	localStorage.setItem('user', JSON.stringify(user));
-		// 	handleClose();
-		// 	toast('Nâng cấp lên OWNER thành công !!', { type: 'success', autoClose: 900 })
-		// } else {
-		// 	handleClose();
-		// 	toast('Nâng cấp lên OWNER thất bại !!', { type: 'error' })
-		// }
+		const id = JSON.parse(localStorage.getItem('user'))._id
+		const response = await UserService.putBecomeOwnerData(id, { data: "668ead6e14c426340ad69882" });
+		console.log(response);
+		if (response?.status === 200 && response?.data) {
+			localStorage.setItem('access_token', response.data.accessToken);
+			let user = {
+				name: response.data.user?.name,
+				email: response.data.user?.email,
+				avatar: response.data.user?.avatar,
+				_id: response.data.user?._id,
+				phone: response.data.user?.phone || null,
+				type: response.data.user?.type,
+				roles: "OWNER",
+			};
+			localStorage.setItem('user', JSON.stringify(user));
+			// handleClose();
+			toast('Nâng cấp lên OWNER thành công !!', { type: 'success', autoClose: 900 })
+			setTimeout(() => {
+				window.location.reload();
+			}, 1000); // Adjust delay as needed (in milliseconds)
+		} else {
+			handleClose();
+			toast('Nâng cấp lên OWNER thất bại !!', { type: 'error' })
+		}
 	};
 	return (
 		<React.Fragment>
@@ -61,7 +59,7 @@ const PricingPage = () => {
 								return actions.order.create({
 									purchase_units: [{
 										amount: {
-											value: '10'
+											value: option
 										}
 									}]
 								});
@@ -124,7 +122,10 @@ const PricingPage = () => {
 														</li>
 													</ul>
 													<div class="mt-auto">
-														<Button variant="outline-primary" onClick={handleShow}>
+														<Button variant="outline-primary" onClick={() => {
+															handleShow();
+															setOption(10);
+														}}>
 															Chọn gói
 														</Button>
 													</div>
@@ -155,7 +156,10 @@ const PricingPage = () => {
 														</li>
 													</ul>
 													<div class="mt-auto">
-														<Button variant="primary" onClick={handleShow}>
+														<Button variant="primary" onClick={() => {
+															handleShow();
+															setOption(40);
+														}}>
 															Chọn gói
 														</Button>
 													</div>
@@ -186,7 +190,10 @@ const PricingPage = () => {
 														</li>
 													</ul>
 													<div class="mt-auto">
-														<Button variant="outline-primary" onClick={handleShow}>
+														<Button variant="outline-primary" onClick={() => {
+															handleShow();
+															setOption(80);
+														}}>
 															Chọn gói
 														</Button>
 													</div>
