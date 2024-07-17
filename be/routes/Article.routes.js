@@ -4,8 +4,8 @@ const articleController = require('../app/controllers/Article.controller');
 const authMiddleware = require('../app/middleware/AuthJwt');
 const isAuth = authMiddleware.isAuth;
 
-router.get('/article/', isAuth, articleController.index);
-router.get('/article/:id', isAuth, articleController.show);
+router.get('/article/', articleController.index);
+router.get('/article/:id', articleController.show);
 router.post('/article/', isAuth, articleController.store);
 router.put('/:id', isAuth,articleController.update);
 

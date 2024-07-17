@@ -8,6 +8,7 @@ const CategoryRouter = require('./category');
 const ServiceRouter = require('./service');
 const VoteRouter = require('./vote');
 const ArticleRouter = require('./Article.routes');
+const BookingRouter = require('./Booking');
 
 
 
@@ -20,7 +21,8 @@ module.exports = {
     CategoryRouter,ServiceRouter,
     UserRouter,
     VoteRouter,
-    ArticleRouter
+    ArticleRouter,
+    BookingRouter
 }
 
 

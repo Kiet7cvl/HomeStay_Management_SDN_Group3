@@ -18,6 +18,10 @@ const articleSchema = new Schema(
     article_content: {
       type: String,
     },
+    owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
     create_at: { type: Date, default: Date.now },
   },
   { collection: "articles" }

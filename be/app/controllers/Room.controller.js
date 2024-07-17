@@ -92,7 +92,7 @@ exports.getRoomById = async (req, res) => {
 // Get room by Owner ID
 exports.getRoomByOwner = async (req, res) => {
   try {
-    const room = await Room.find({ owner: req.params.id});
+    const room = await Room.find({ owner: req.params.id });
     if (!room) {
       return res.status(404).json({ error: 'Room not found' });
     }

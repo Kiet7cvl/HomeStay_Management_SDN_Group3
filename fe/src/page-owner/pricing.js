@@ -3,8 +3,8 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { UserService } from "../services/feService/userService";
-
 import { toast } from "react-toastify"
+import { redirect } from "react-router";
 
 const PricingPage = () => {
 
@@ -39,7 +39,7 @@ const PricingPage = () => {
 			// handleClose();
 			toast('Nâng cấp lên OWNER thành công !!', { type: 'success', autoClose: 900 })
 			setTimeout(() => {
-				window.location.reload();
+				window.location.href = '/';
 			}, 1000); // Adjust delay as needed (in milliseconds)
 		} else {
 			handleClose();

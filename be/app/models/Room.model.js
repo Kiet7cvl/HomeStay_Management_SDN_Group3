@@ -33,6 +33,9 @@ const roomSchema = new Schema(
     bathroom: {
       type: Number,
     },
+    amount_of_people: {
+      type: Number,
+    },
     total_vote: {
       type: Number,
     },

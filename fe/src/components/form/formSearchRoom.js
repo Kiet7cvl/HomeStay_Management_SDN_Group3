@@ -82,7 +82,6 @@ export const FormRoomSearch = (props) => {
 						type={'text'}
 					/>
 				</Form.Group>
-
 				<Form.Group className="mb-3 col-md-12">
 					<SelectBase form={form} setForm={setForm} name={'category'}
 						label={'Loại phòng: '} data={categories}

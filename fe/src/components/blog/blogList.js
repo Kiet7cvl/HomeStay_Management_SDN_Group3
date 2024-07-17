@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState, } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Route, Routes, Navigate, Link } from "react-router-dom";
 import { DEFAULT_IMG } from "../../common/constant";
@@ -8,38 +8,43 @@ import { Pagination } from "../common/pagination";
 import { NotFoundPage } from "../common/notFound";
 
 
-export const BlogList = ( props ) =>
-{
+export const BlogList = (props) => {
+	useEffect(() => {
+	}, []);
 	return (
 		<React.Fragment>
-			<section className={ `ftco-section ${ props.notShowTitle ? 'pt-0' : ' bg-light' }` }>
+			<section className={`pt-4 ftco-section ${props.notShowTitle ? 'pt-0' : ' bg-light'}`}>
 				<Container>
 					{
 						!props.notShowTitle && <Row className="row justify-content-center mb-5 pb-3">
-							<Col md={ 7 } className="heading-section text-center">
-								<h2 className="mb-4">{ props.title || 'Menu' }</h2>
+							<Col md={7} className="heading-section text-center">
+								<h2 className="mb-4">{props.title || 'Menu'}</h2>
 							</Col>
 						</Row>
 					}
 					<Row>
-						{ props.data?.length > 0 ? props.data.map( ( item, key ) =>
-						{
+						{props.data?.length > 0 ? props.data.map((item, key) => {
 							return (
-								<Col md={ 3 } key={ key }>
+								<Col md={3} key={key}>
 									<div className="blog-entry  align-self-stretch">
-										<Link to={ '/menu/show/' + item._id } className="block-20 br-top-left-6 br-top-right-6"
+										<a href={'/menu/show/' + item._id} onClick={() => {
+											window.scrollTo({
+												top: 0,
+												behavior: 'smooth',
+											});
+										}} className="block-20 br-top-left-6 br-top-right-6"
 										>
-											<img src={ item.avatar && buildImage( item.avatar ) || DEFAULT_IMG }
-												className="w-100 h-100 img br-top-left-6 br-top-right-6" onError={ onErrorImg } />
-										</Link>
+											<img src={item.avatar && buildImage(item.avatar) || DEFAULT_IMG}
+												className="w-100 h-100 img br-top-left-6 br-top-right-6" onError={onErrorImg} />
+										</a>
 										<div className="text mt-3 d-block br-bottom-left-6 br-bottom-right-6">
 											<h3 className="heading mt-3">
-												<Link to={ '/menu/show/' + item._id }>{ item.name }</Link>
+												<a className="text-decoration-none" href={'/menu/show/' + item._id}>{item.name}</a>
 											</h3>
 
 											<p className="meta mb-3">
 												<div>
-													<a href="#">{ customDate( item.created_at, 'DD-MM-yyyy' ) }</a>
+													<a className="text-decoration-none text-secondary" href="#">{customDate(item.created_at, 'DD-MM-yyyy')}</a>
 												</div>
 
 											</p>
@@ -47,7 +52,7 @@ export const BlogList = ( props ) =>
 									</div>
 								</Col>
 							)
-						} ) : <NotFoundPage />
+						}) : <NotFoundPage />
 						}
 
 						{
@@ -72,8 +77,8 @@ export const BlogList = ( props ) =>
 					</Row>
 					{
 						props.isShowLink &&
-						<Row>
-							<Col md={ 12 }>
+						<Row className="pb-4">
+							<Col md={12}>
 								<div className="mt-3 text-center">
 									<Link
 										to="/menu"
