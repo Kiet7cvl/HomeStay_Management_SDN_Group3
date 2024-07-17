@@ -47,6 +47,10 @@ const roomSchema = new Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Category",
     },
+    owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
     services: [
       {
         type: mongoose.Schema.Types.ObjectId,

@@ -16,6 +16,12 @@ export const RoomService = {
 	async getDetailData(id) {
 		return await getMethod('room/' + id);
 	},
+	async getRoombyOwner(id) {
+		return await getMethod('owner/room-list/' + id);
+	},
+	async getRoomById(id) {
+		return await getMethod('owner/room-detail/' + id);
+	},
 	async createData(data) {
 		return await postMethod('room', data);
 	},

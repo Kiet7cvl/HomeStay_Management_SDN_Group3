@@ -3,13 +3,13 @@ import { Col, Container, Row, Form, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import { toggleShowLoading } from "../../redux/actions/common";
-// import { OtherService } from "../../services/feService/otherService";
+import { OtherService } from "../../services/feService/otherService";
 import { buildImage, caculateDateTime, customDate, customNumber, getItem, getUser, readFile, setField, timeDelay } from "../../common/helper";
 import { toast } from "react-toastify";
 import { InputBase } from "../base-form/controlInputForm";
 import { SelectBase } from "../base-form/selectForm";
-// import { AuthService } from "../../services/feService/authService";
-import { DEFAULT_IMG } from "../../common/constant";
+import { AuthService } from "../../services/feService/authService";
+import { DEFAULT_USER } from "../../common/constant";
 
 
 export const FormProfile = ( props ) =>
@@ -29,69 +29,69 @@ export const FormProfile = ( props ) =>
 
 	let [file, setFile] = useState();
 
-	// useEffect( () =>
-	// {
-	// 	if ( props.status && props.data )
-	// 	{
-	// 		let user = {
-	// 			email: props.data.email,
-	// 			name: props.data.name,
-	// 			sex: props.data.sex,
-	// 			birthday: props.data.birthday && customDate(props.data.birthday, 'yyyy-MM-DD') || null,
-	// 			avatar: props.data.avatar
-	// 		};
-	// 		setForm(user);
-	// 		setImgBase64(buildImage(user.avatar));
-	// 	}
-	// }, [ props.data, props.status ] );
+	useEffect( () =>
+	{
+		if ( props.status && props.data )
+		{
+			let user = {
+				email: props.data.email,
+				name: props.data.name,
+				sex: props.data.sex,
+				birthday: props.data.birthday && customDate(props.data.birthday, 'yyyy-MM-DD') || null,
+				avatar: props.data?.avatar
+			};
+			setForm(user);
+			setImgBase64(buildImage(user.data?.avatar));
+		}
+	}, [ props.data, props.status ] );
 
-	// const [ validated, setValidated ] = useState( false );
+	const [ validated, setValidated ] = useState( false );
 
-	// const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
-	// const handleSubmit = async ( e ) =>
-	// {
-	// 	e.preventDefault();
-	// 	if ( e?.currentTarget?.checkValidity() === false )
-	// 	{
-	// 		e.stopPropagation();
-	// 	} else
-	// 	{
-	// 		dispatch( toggleShowLoading( true ) );
-	// 		if(file) {
-	// 			const avatar = await OtherService.uploadFiles(file);
-	// 			if(avatar) {
-	// 				form.avatar = avatar;
-	// 			}
-	// 		}
-	// 		const response = await AuthService.updateProfile( form );
-	// 		if ( response?.status === 200 && response?.data )
-	// 		{
+	const handleSubmit = async ( e ) =>
+	{
+		e.preventDefault();
+		if ( e?.currentTarget?.checkValidity() === false )
+		{
+			e.stopPropagation();
+		} else
+		{
+			dispatch( toggleShowLoading( true ) );
+			if(file) {
+				const avatar = await OtherService.uploadFiles(file);
+				if(avatar) {
+					form.avatar = avatar;
+				}
+			}
+			const response = await AuthService.updateProfile( form );
+			if ( response?.status === 200 && response?.data )
+			{
 
-	// 			toast( 'Cập nhật thành công!', { type: 'success', autoClose: 900 } );
-	// 			await timeDelay( 1000 );
-	// 			dispatch( toggleShowLoading( false ) )
-	// 			window.location.href =  '/account';
-	// 		} else
-	// 		{
-	// 			toast( response?.message || 'Cập nhật thất bại!', { type: 'error', autoClose: 900 } )
-	// 		}
-	// 		dispatch( toggleShowLoading( false ) )
-	// 	}
+				toast( 'Cập nhật thành công!', { type: 'success', autoClose: 900 } );
+				await timeDelay( 1000 );
+				dispatch( toggleShowLoading( false ) )
+				window.location.href =  '/account';
+			} else
+			{
+				toast( response?.message || 'Cập nhật thất bại!', { type: 'error', autoClose: 900 } )
+			}
+			dispatch( toggleShowLoading( false ) )
+		}
 
-	// 	setValidated( true );
+		setValidated( true );
 
-	// }
+	}
 
 
 	return (
 		<Form className="user-form" noValidate 
-		// validated={ validated } 
-		// onSubmit={ handleSubmit }
+		validated={ validated } 
+		onSubmit={ handleSubmit }
 		>
 			<Row>
 				<Form.Group className="mb-3 col-12">
-					<img src={imgBase64 || DEFAULT_IMG} className="avatar d-flex mx-auto cursor-pointer" onClick={
+					<img src={imgBase64 || DEFAULT_USER} className="avatar d-flex mx-auto cursor-pointer" onClick={
 						e => {
 							if(refFile?.current) refFile.current.click();
 						}

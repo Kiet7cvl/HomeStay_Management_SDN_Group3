@@ -5,10 +5,12 @@ const authMiddleware = require('../app/middleware/AuthJwt');
 const isAuth = authMiddleware.isAuth;
 
 // CRUD routes for Room
-router.post('/create', isAuth, roomController.createRoom);
-router.get('/', roomController.getAllRooms);
-router.get('/:id', roomController.getRoomById);
-router.put('/:id', isAuth, roomController.updateRoom);
-router.delete('/:id', isAuth, roomController.deleteRoom);
+router.post('/room/create', isAuth, roomController.createRoom);
+router.get('/room/', roomController.getAllRooms);
+router.get('/room/:id', roomController.getRoomById);
+router.get('/owner/room-list/:id', roomController.getRoomByOwner);
+router.get('/owner/room-detail/:id', roomController.getRoomById);
+router.put('/room/:id', isAuth, roomController.updateRoom);
+router.delete('/room/:id', isAuth, roomController.deleteRoom);
 
 module.exports = router;

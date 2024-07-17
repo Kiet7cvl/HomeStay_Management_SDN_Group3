@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/payments', Payment);
 app.use('/', AuthRouter);
-app.use('/room', RoomRouter)
+app.use('/', RoomRouter)
 app.use('/', CategoryRouter)
 app.use('/', ServiceRouter)
 app.use('/', UserRouter)

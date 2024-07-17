@@ -21,7 +21,7 @@ export const getUser = () => {
 
 export const customNumber = (number, formatValue, type) => {
 
-	return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, formatValue) + type;
+	return number?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, formatValue) + type;
 }
 
 export const checkLogin = () => {

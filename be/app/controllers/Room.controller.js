@@ -89,6 +89,20 @@ exports.getRoomById = async (req, res) => {
   }
 };
 
+// Get room by Owner ID
+exports.getRoomByOwner = async (req, res) => {
+  try {
+    const room = await Room.find({ owner: req.params.id});
+    if (!room) {
+      return res.status(404).json({ error: 'Room not found' });
+    }
+    res.status(200).json({ data: room, status: 200 });
+
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
 // Update a room by ID
 exports.updateRoom = async (req, res) => {
   try {

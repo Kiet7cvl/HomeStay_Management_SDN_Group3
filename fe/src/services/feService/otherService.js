@@ -1,12 +1,12 @@
 import { buildFilter } from "../../common/helper";
 import { deleteMethod, getMethod, postMethod, putMethod, uploadFile } from "../baseService";
+import axios from 'axios';
 
 export const OtherService = {
-	async getListDiscount(filters,isSet,setSearchParams) {
+	async getListDiscount(filters, isSet, setSearchParams) {
 		const params = buildFilter(filters);
-		if ( isSet )
-		{
-			setSearchParams( params )
+		if (isSet) {
+			setSearchParams(params)
 
 		}
 		return await getMethod('discount', params);
@@ -20,7 +20,7 @@ export const OtherService = {
 		const params = buildFilter(filters);
 		return await getMethod('category/', params);
 	},
-	
+
 	async getDetailData(id) {
 		return await getMethod('contact/' + id);
 	},
@@ -28,8 +28,8 @@ export const OtherService = {
 	async createContact(data) {
 		return await postMethod('contact', data);
 	},
-	
-	async putData(id,data) {
+
+	async putData(id, data) {
 		return await putMethod('contact/' + id, data);
 	},
 
@@ -37,24 +37,41 @@ export const OtherService = {
 		return await deleteMethod('contact/' + id);
 	},
 
-	async uploadFiles ( files )
-	{
+	async uploadFiles(files) {
 		let avatar = null;
-		try
-		{
+		try {
 			const formData = new FormData();
-			formData.append( 'file', files);
+			formData.append('file', files);
 			const res = await uploadFile(formData);
-			if ( res.status === 200 )
-			{
+			if (res.status === 200) {
 				avatar = res.data.filename;
 			}
-		} catch ( error )
-		{
-			
+		} catch (error) {
+
 		}
 
 		return avatar;
+
+	},
+	async uploadMultiImg(files) {
+		let albums = [];
+		try {
+			for (let item of files) {
+				if (item.file) {
+					const formData = new FormData();
+					formData.append('file', item.file);
+					const res = await axios.post(`${process.env.EACT_APP_API}upload-avatar`,
+						formData, { headers: { 'Accept': 'multipart/form-data' } });
+					if (res.status === 200) {
+						albums.push(res.data.data.filename);
+					}
+				}
+
+			}
+
+		} catch (error) {
+		}
+		return albums;
 
 	},
 }

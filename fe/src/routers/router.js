@@ -80,7 +80,7 @@ export const Routers = [
 		component: < RoomLissPage />
 	},
 	{
-		path: "/owner/room-detail",
+		path: "/owner/room-detail/:id",
 		title: 'Chi tiết phòng',
 		component: < RoomDetail />
 	},

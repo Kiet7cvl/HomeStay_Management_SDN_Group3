@@ -92,11 +92,8 @@ exports.getProfile = async ( req, res ) =>
 {
 	try
 	{
-		const user = req.user;
-		const response = {
-			user: user
-		}
-		return res.status( 200 ).json( { data: response, status: 200 } );
+		const user = await User.findOne({ _id: req.params.id });
+		return res.status( 200 ).json( { data: user, status: 200 } );
 	} catch {
 		res.status( 404 )
 		res.send( { error: "register doesn't exist!" } )

@@ -1,4 +1,5 @@
 const Booking = require("./../../models/Booking.model")
+const mailService = require("../../services/SendMail.service");
 
 exports.index = async (req, res) => {
     const page = req.query.page || 1; const page_size = req.query.page_size  || 10;
@@ -90,4 +91,44 @@ exports.updatePaymentStatus = async (req, res) => {
     } catch {
         res.status(404).send({ error: "Booking doesn't exist!" });
     }
+};
+
+
+const createBooking = async (req, res) => {
+    try {
+        const booking = new Booking({
+        user_id: req.body.user_id,
+        room_id: req.body.room_id,
+        discount_id: req.body.discount_id,
+        discount_code: req.body.discount_code,
+        discount: req.body.discount,
+        status: req.body.status,
+        status_payment: req.body.status_payment,
+        price: req.body.price,
+        total_money: req.body.total_money,
+        amount_of_people: req.body.amount_of_people,
+        payment_type: req.body.payment_type,
+        note: req.body.note,
+        check_in: req.body.check_in,
+        check_out: req.body.check_out,
+        customer_name: req.body.customer_name,
+        customer_email: req.body.customer_email,
+        customer_phone: req.body.customer_phone,
+        });
+        await booking.save().then((booking) => {
+        const formResponse = mailService.generateHtmlContent(
+            req.body.customer_name,
+            booking
+        );
+        mailService.sendMail(req.body.customer_email, formResponse);
+        res.status(201).json({ data: booking, status: 201 });
+        });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send({ error: "Internal Server Error" });
+    }
+    };
+
+module.exports = {
+    createBooking,
 };
