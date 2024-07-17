@@ -1,9 +1,13 @@
 const User = require("../models/User.model") // new
 require("dotenv").config();
-const jwt = require('jsonwebtoken');
-const promisify = require('util').promisify;
-const sign = promisify(jwt.sign).bind(jwt);
-const verify = promisify(jwt.verify).bind(jwt);
+
+const jwt = require( 'jsonwebtoken' );
+const promisify = require( 'util' ).promisify;
+const sign = promisify( jwt.sign ).bind( jwt );
+const verify = promisify( jwt.verify ).bind( jwt );
+const bufferToDataURI = require("../utils/file");
+const { uploadToCloudinary } = require("../services/upload");
+const ErrorHandler = require("../utils/errorHandler");
 const mailService = require("../../services/SendMail.service");
 
 
@@ -70,32 +74,41 @@ exports.store = async (req, res) => {
 };
 
 exports.update = async (req, res) => {
+    const { file } = req;
+    console.log("🚀 ========= file:", file);
+    console.log("🚀 ========= req.params.id:", req.params.id);
     try {
-        const user = await User.findOne({ _id: req.params.id })
-
-        if (req.body.name) {
-            user.name = req.body.name;
-        }
-        if (req.body.avatar) {
-            user.avatar = req.body.avatar;
-        }
-        if (req.body.email) {
-            user.email = req.body.email;
-        }
-        if (req.body.sex) {
-            user.sex = req.body.sex;
-        }
-        if (req.body.birthday) {
-            user.birthday = req.body.birthday;
-        }
-
-        await user.save();
-        return res.status(200).json({ data: user, status: 200 });
+      const user = await User.findOne({ _id: req.params.id });
+  
+      if (req.body.name) {
+        user.name = req.body.name;
+      }
+      if (req.body.avatar) {
+        user.avatar = req.body.avatar;
+      }
+      if (req.body.email) {
+        user.email = req.body.email;
+      }
+      if (req.body.sex) {
+        user.sex = req.body.sex;
+      }
+      if (req.body.birthday) {
+        user.birthday = req.body.birthday;
+      }
+      if (file) {
+        if (!file) throw new ErrorHandler(400, "Image is required");
+        const fileFormat = file.mimetype.split("/")[1];
+        const { base64 } = await bufferToDataURI(fileFormat, file.buffer);
+        const imageDetails = await uploadToCloudinary(base64, fileFormat);
+        user.avatar = imageDetails.url;
+      }
+      await user.save();
+      return res.status(200).json({ data: user, status: 200 });
     } catch {
-        res.status(404)
-        res.send({ error: "User doesn't exist!" })
+      res.status(404);
+      res.send({ error: "User doesn't exist!" });
     }
-};
+  };
 
 exports.becomeOnwer = async (req, res) => {
     try {
